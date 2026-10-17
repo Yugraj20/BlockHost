@@ -311,15 +311,15 @@
           </div>
 
           <!-- Live Terminal Output Column -->
-          <div class="lg:col-span-6 flex flex-col">
-            <div class="flex items-center justify-between pb-2 mb-2 border-b border-white/5">
+          <div class="lg:col-span-6 flex flex-col h-full">
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-white/5 shrink-0">
               <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Server Terminal</span>
               <button id="toggle-server-btn" onclick="toggleServer()" class="text-xs px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition-colors font-bold">
                 Stop Server
               </button>
             </div>
             
-            <div id="terminal-body" class="bg-[#06080d] p-4 rounded-xl border border-white/5 font-mono text-[11px] text-slate-300 h-64 overflow-y-auto space-y-1.5 flex-1 shadow-inner">
+            <div id="terminal-body" class="bg-[#06080d] p-4 rounded-xl border border-white/5 font-mono text-[11px] text-slate-300 h-[340px] max-h-[340px] overflow-y-auto space-y-1.5 shadow-inner scroll-smooth">
               <div class="text-slate-500">[12:00:00 INFO]: Loading Adoptium Temurin OpenJDK 21.0.6...</div>
               <div class="text-slate-500">[12:00:01 INFO]: Allocating 8192 MB JVM Heap with Aikar G1GC Flags...</div>
               <div class="text-emerald-400">[12:00:02 INFO]: Starting minecraft server version 1.21.4 (Paper)</div>
@@ -1029,6 +1029,9 @@
       div.className = msg.includes('WARN') ? 'text-amber-400' : msg.includes('Paper') || msg.includes('Done') ? 'text-emerald-400' : 'text-slate-300';
       div.textContent = `[${time}]: ${msg}`;
       body.appendChild(div);
+      while (body.children.length > 35) {
+        body.removeChild(body.firstChild);
+      }
       body.scrollTop = body.scrollHeight;
     }
 
