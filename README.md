@@ -28,7 +28,7 @@
 
   <br />
 
-  <img src="resources/Code_Generated_Image.gif" alt="BlockHost Ambient Interface" width="850" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
+
 
 </div>
 
