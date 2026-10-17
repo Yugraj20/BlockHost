@@ -61,8 +61,12 @@ interface AppStoreState {
   updater: {
     status: string
     version?: string
+    releaseName?: string
     progressPercent?: number
     message?: string
+    downloadUrl?: string
+    releaseNotes?: string
+    isForced?: boolean
   }
 
   setActiveTab: (tab: NavTab) => void

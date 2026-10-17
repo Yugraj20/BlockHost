@@ -3,6 +3,7 @@ import { Lock } from 'lucide-react'
 import { useAppStore } from './stores/useAppStore'
 import { TitleBar } from './components/TitleBar'
 import { Sidebar } from './components/Sidebar'
+import { ForcedUpdateModal } from './components/ForcedUpdateModal'
 import { DashboardPage } from './pages/DashboardPage'
 import { ServersPage } from './pages/ServersPage'
 import { CreateServerPage } from './pages/CreateServerPage'
@@ -127,6 +128,9 @@ export const App: React.FC = () => {
       </div>
 
       <div className="relative z-10 flex flex-col h-full w-full">
+        {/* Forced Mandatory Update Modal */}
+        <ForcedUpdateModal />
+
         <TitleBar />
 
         {/* PIN Lock Modal */}

@@ -5,6 +5,7 @@ const api = {
   minimizeWindow: () => ipcRenderer.invoke('window:minimize'),
   maximizeWindow: () => ipcRenderer.invoke('window:maximize'),
   closeWindow: () => ipcRenderer.invoke('window:close'),
+  quitApp: () => ipcRenderer.invoke('app:quit'),
 
   // Bootstrap
   bootstrap: () => ipcRenderer.invoke('app:bootstrap'),

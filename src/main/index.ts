@@ -85,6 +85,10 @@ function registerIpcHandlers(): void {
       app.quit()
     }
   })
+  ipcMain.handle('app:quit', () => {
+    isQuitting = true
+    app.quit()
+  })
 
   // Initial bootstrap snapshot
   ipcMain.handle('app:bootstrap', async () => {
@@ -478,6 +482,14 @@ app.whenReady().then(async () => {
       })
     }
   }
+
+  // Secret background update check whenever opened
+  setTimeout(() => {
+    logger.info('[App Startup] Running secret background update check...')
+    updaterService.checkForUpdates(true).catch((err) => {
+      logger.error('[App Startup] Secret update check failed:', err)
+    })
+  }, 2000)
 
   if (process.argv.includes('--test-launch')) {
     logger.info('[Test Launch] Flag --test-launch detected, verifying window load...')

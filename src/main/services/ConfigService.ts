@@ -60,8 +60,8 @@ export class ConfigService {
       pinEnabled: false,
       pinHash: '',
       autoUpdateChannel: 'latest',
-      updateFeedOwner: 'blockhost',
-      updateFeedRepo: 'blockhost-releases',
+      updateFeedOwner: 'Yugraj20',
+      updateFeedRepo: 'BlockHost',
       commandMacros: [
         { id: 'macro-day', label: 'Set Day', command: 'time set day', color: 'amber' },
         { id: 'macro-clear', label: 'Clear Weather', command: 'weather clear', color: 'cyan' },
