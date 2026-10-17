@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+.theme-dark {
+  --bh-bg: #070a12;
+  --bh-panel: #0d1322;
+  --bh-card: #121a2e;
+  --bh-border: rgba(255, 255, 255, 0.08);
+  --bh-text: #f8fafc;
+  --bh-muted: #94a3b8;
+  --bh-accent: #6366f1;
+  --bh-accent-hover: #4f46e5;
+  --bh-accent-subtle: rgba(99, 102, 241, 0.15);
+  --bh-accent-border: rgba(99, 102, 241, 0.35);
+  --bh-accent-glow: 0 4px 20px -2px rgba(99, 102, 241, 0.45);
+}
+
+.theme-light {
+  --bh-bg: #f8fafc;
+  --bh-panel: #ffffff;
+  --bh-card: #f1f5f9;
+  --bh-border: rgba(15, 23, 42, 0.1);
+  --bh-text: #0f172a;
+  --bh-muted: #64748b;
+  --bh-accent: #4f46e5;
+  --bh-accent-hover: #4338ca;
+  --bh-accent-subtle: rgba(79, 70, 229, 0.12);
+  --bh-accent-border: rgba(79, 70, 229, 0.3);
+  --bh-accent-glow: 0 4px 20px -2px rgba(79, 70, 229, 0.3);
+}
+
+.accent-indigo {
+  --bh-accent: #6366f1;
+  --bh-accent-hover: #4f46e5;
+  --bh-accent-subtle: rgba(99, 102, 241, 0.15);
+  --bh-accent-border: rgba(99, 102, 241, 0.35);
+  --bh-accent-glow: 0 4px 20px -2px rgba(99, 102, 241, 0.45);
+}
+
+.accent-violet {
+  --bh-accent: #8b5cf6;
+  --bh-accent-hover: #7c3aed;
+  --bh-accent-subtle: rgba(139, 92, 246, 0.15);
+  --bh-accent-border: rgba(139, 92, 246, 0.35);
+  --bh-accent-glow: 0 4px 20px -2px rgba(139, 92, 246, 0.45);
+}
+
+.accent-cyan {
+  --bh-accent: #06b6d4;
+  --bh-accent-hover: #0891b2;
+  --bh-accent-subtle: rgba(6, 182, 212, 0.15);
+  --bh-accent-border: rgba(6, 182, 212, 0.35);
+  --bh-accent-glow: 0 4px 20px -2px rgba(6, 182, 212, 0.45);
+}
+
+.accent-emerald {
+  --bh-accent: #10b981;
+  --bh-accent-hover: #059669;
+  --bh-accent-subtle: rgba(16, 185, 129, 0.15);
+  --bh-accent-border: rgba(16, 185, 129, 0.35);
+  --bh-accent-glow: 0 4px 20px -2px rgba(16, 185, 129, 0.45);
+}
+
+.accent-amber {
+  --bh-accent: #f59e0b;
+  --bh-accent-hover: #d97706;
+  --bh-accent-subtle: rgba(245, 158, 11, 0.15);
+  --bh-accent-border: rgba(245, 158, 11, 0.35);
+  --bh-accent-glow: 0 4px 20px -2px rgba(245, 158, 11, 0.45);
+}
+
+.accent-rose {
+  --bh-accent: #f43f5e;
+  --bh-accent-hover: #e11d48;
+  --bh-accent-subtle: rgba(244, 63, 94, 0.15);
+  --bh-accent-border: rgba(244, 63, 94, 0.35);
+  --bh-accent-glow: 0 4px 20px -2px rgba(244, 63, 94, 0.45);
+}
+
+.font-scale-sm {
+  font-size: 13px;
+}
+.font-scale-md {
+  font-size: 14px;
+}
+.font-scale-lg {
+  font-size: 16px;
+}
+
+.high-contrast {
+  --bh-border: rgba(255, 255, 255, 0.28);
+}
+
+.reduced-motion * {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.35);
+}
+
+/* Frameless window drag region */
+.drag-region {
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom UI Component Utilities */
+.btn-accent {
+  background-color: var(--bh-accent);
+  color: #ffffff;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px -2px var(--bh-accent-subtle);
+}
+.btn-accent:hover:not(:disabled) {
+  background-color: var(--bh-accent-hover);
+  box-shadow: var(--bh-accent-glow);
+  transform: translateY(-0.5px);
+}
+.btn-accent:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.badge-accent {
+  background-color: var(--bh-accent-subtle);
+  color: var(--bh-accent);
+  border: 1px solid var(--bh-accent-border);
+}
+
+.card-hover {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5);
+}
