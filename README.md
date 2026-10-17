@@ -6,6 +6,7 @@
   **The Next-Generation Minecraft Server Engine & Management Platform for Windows**
 
   [![Release](https://img.shields.io/github/v/release/Yugraj20/BlockHost?color=10b981&label=Release&style=for-the-badge)](https://github.com/Yugraj20/BlockHost/releases)
+  [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/yugraj20)
   [![Platform](https://img.shields.io/badge/Platform-Windows%20x64-0078d4?style=for-the-badge&logo=windows)](https://github.com/Yugraj20/BlockHost/releases)
   [![License](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
   [![Electron](https://img.shields.io/badge/Electron-33-47848F?style=for-the-badge&logo=electron)](https://www.electronjs.org/)
@@ -162,6 +163,12 @@ npm run build:win
 ```
 The output executable will be generated inside the `dist/` directory:
 `dist/BlockHost Setup 0.1.0-beta.exe`
+
+## ☕ Support the Project
+
+If you love using BlockHost and want to support ongoing maintenance and new features, consider buying a coffee:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/yugraj20)
 
 ---
 

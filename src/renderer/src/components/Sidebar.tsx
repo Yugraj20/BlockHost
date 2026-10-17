@@ -9,7 +9,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Github,
-  ExternalLink
+  ExternalLink,
+  Coffee
 } from 'lucide-react'
 import { useAppStore, NavTab } from '../stores/useAppStore'
 
@@ -91,7 +92,7 @@ export const Sidebar: React.FC = () => {
       {/* Bottom Artwork Card ("Your World, Your Rules") */}
       {!collapsed ? (
         <div className="p-3">
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-xl h-44 group">
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-xl h-52 group">
             <img
               src="./Code_Generated_Image.gif"
               alt="Minecraft World"
@@ -101,8 +102,19 @@ export const Sidebar: React.FC = () => {
 
             {/* Interactive Content Overlay */}
             <div className="relative h-full flex flex-col justify-between p-3.5 z-10">
-              {/* GitHub Button positioned over the artwork */}
-              <div className="flex justify-between items-start">
+              {/* Support & GitHub Buttons positioned over the artwork */}
+              <div className="flex flex-col gap-1.5 items-start">
+                <button
+                  type="button"
+                  onClick={() => window.api.openExternal('https://www.buymeacoffee.com/yugraj20')}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFDD00] hover:bg-[#FFEA47] text-black border border-amber-300/40 backdrop-blur-md text-[11px] font-bold transition-all hover:scale-105 shadow-md active:scale-95 group/bmac"
+                  title="Buy Me a Coffee (buymeacoffee.com/yugraj20)"
+                >
+                  <Coffee className="w-3.5 h-3.5 text-black" />
+                  <span>Buy Me a Coffee</span>
+                  <ExternalLink className="w-2.5 h-2.5 text-black/60 group-hover/bmac:text-black" />
+                </button>
+
                 <button
                   type="button"
                   onClick={() => window.api.openExternal('https://github.com/Yugraj20')}
@@ -136,7 +148,15 @@ export const Sidebar: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="p-2 flex justify-center">
+        <div className="p-2 flex flex-col items-center gap-2">
+          <button
+            type="button"
+            onClick={() => window.api.openExternal('https://www.buymeacoffee.com/yugraj20')}
+            className="w-10 h-10 rounded-xl bg-[#FFDD00] hover:bg-[#FFEA47] border border-amber-300/40 flex items-center justify-center text-black transition-all shadow-md group/bmac"
+            title="Buy Me a Coffee (buymeacoffee.com/yugraj20)"
+          >
+            <Coffee className="w-5 h-5 text-black group-hover/bmac:scale-110 transition-transform" />
+          </button>
           <button
             type="button"
             onClick={() => window.api.openExternal('https://github.com/Yugraj20')}
