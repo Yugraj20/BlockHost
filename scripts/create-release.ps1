@@ -15,26 +15,24 @@ if (-not $token) {
 }
 
 $repo = "Yugraj20/BlockHost"
-$tagName = "v0.1.0-beta"
-$releaseName = "BlockHost v0.1.0-beta"
+$tagName = "v0.2.0-beta"
+$releaseName = "BlockHost v0.2.0-beta"
 $releaseBody = @"
-## BlockHost v0.1.0-beta
+## BlockHost v0.2.0-beta
 
-Welcome to the first beta release of **BlockHost** — a modern, all-in-one Windows desktop application for hosting, managing, and tunneling local Minecraft servers.
+Welcome to **BlockHost v0.2.0-beta**! This release brings major enhancements, including a silent background update checker, responsive 3D web experience, and direct developer support.
 
-### 🌟 Key Highlights
-- **Dashboard & Performance Sparklines**: Real-time CPU, RAM, Disk, and JVM heap monitoring with embedded server console.
+### 🌟 Key Highlights in v0.2.0-beta
+- **Mandatory Update System**: Silent background update checks on launch with forced update modal and direct installer downloads.
+- **Buy Me a Coffee Integration**: Direct support button integrated into desktop app sidebar and official website.
+- **Responsive 3D Experience**: Dynamic isometric camera scaling, touch-scrolling separation, and mobile navigation drawer.
 - **7 Server Engines Supported**: Vanilla, Paper, Purpur, Fabric, Quilt, Forge, and NeoForge with automatic version & build discovery.
-- **Adoptium JDK Manager**: Automatic detection and 1-click in-process downloads for Java 8, 17, 21, and 25.
-- **Integrated playit.gg Networking**: In-process tunneling with zero external processes, custom tunnel routing, and claim code setup.
-- **Modrinth Integration**: Browse, install, and update Mods, Plugins, and .mrpack Modpacks.
-- **Advanced Player Management**: Whitelist, Operators (OP 1-4), IP & player bans, and Mojang UUID lookups.
-- **File Manager & Web Code Editor**: In-browser config file editor with automatic backup preservation and ZIP extract/compress.
-- **Automated Backups & Cron Schedules**: Safe server flushing with rollback checkpoints and scheduled tasks.
+- **Adoptium JDK Manager**: Automatic detection and 1-click downloads for Java 8, 17, 21, and 25.
+- **Integrated playit.gg Networking**: Zero port-forwarding required with in-process tunneling.
 - **Accurate 5-Part RAM Allocation**: Proportional memory milestones with 1-click snap alignment.
 
 ### 📦 Assets Included
-- ``BlockHost Setup 0.1.0-beta.exe``: Windows x64 NSIS Installer.
+- ``BlockHost.Setup.0.2.0-beta.exe``: Windows x64 NSIS Installer.
 "@
 
 $headers = @{
@@ -66,8 +64,9 @@ if (-not $release) {
     Write-Host "Created release with ID $($release.id) at $($release.html_url)"
 }
 
-# Upload asset BlockHost Setup 0.1.0-beta.exe
-$exePath = (Resolve-Path (Join-Path $PSScriptRoot "..\dist\BlockHost Setup 0.1.0-beta.exe")).Path
+# Upload asset BlockHost Setup 0.2.0-beta.exe
+$exeFile = Get-ChildItem (Join-Path $PSScriptRoot "..\dist") -Filter "*.exe" | Where-Object { $_.Name -like "*0.2.0-beta*" } | Select-Object -First 1
+$exePath = $exeFile.FullName
 if (Test-Path $exePath) {
     $exeName = [System.IO.Path]::GetFileName($exePath)
     Write-Host "Uploading $exeName ($( [math]::Round((Get-Item $exePath).Length / 1MB, 2) ) MB)..."

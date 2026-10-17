@@ -1,6 +1,6 @@
 {
   "name": "blockhost",
-  "version": "0.1.0-beta",
+  "version": "0.2.0-beta",
   "description": "BlockHost - Minecraft Server Hosting & Management Platform",
   "main": "./out/main/index.js",
   "author": "BlockHost Team",

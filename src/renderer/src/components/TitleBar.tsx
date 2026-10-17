@@ -36,7 +36,7 @@ export const TitleBar: React.FC = () => {
         <span className="w-2 h-2 rounded-full bg-bh-accent animate-pulse" />
         <span className="font-semibold text-bh-text">BlockHost Desktop Engine</span>
         <span className="text-[10px] px-2 py-0.5 rounded-full badge-accent font-bold">
-          v0.1.0-beta
+          v0.2.0-beta
         </span>
         {activeDownloads.length > 0 && (
           <span className="ml-2 px-2 py-0.5 rounded-full badge-accent text-[11px] font-semibold">

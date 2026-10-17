@@ -529,7 +529,7 @@ export const SettingsPage: React.FC = () => {
 
           <div className="flex items-center justify-between bg-bh-panel p-4 rounded-xl border border-bh-border">
             <div>
-              <p className="text-xs font-bold text-bh-text">Current Version: v0.1.0-beta</p>
+              <p className="text-xs font-bold text-bh-text">Current Version: v0.2.0-beta</p>
               <p className="text-xs text-bh-muted mt-0.5">
                 {updater.message || 'Click "Check for Updates" to query the release feed.'}
               </p>

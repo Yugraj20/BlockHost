@@ -17,7 +17,7 @@ export const ForcedUpdateModal: React.FC = () => {
     updater.downloadUrl ||
     'https://github.com/Yugraj20/BlockHost/releases/latest'
 
-  const currentVersion = 'v0.1.0-beta'
+  const currentVersion = 'v0.2.0-beta'
   const targetVersion = updater.version?.startsWith('v')
     ? updater.version
     : `v${updater.version || 'Latest'}`

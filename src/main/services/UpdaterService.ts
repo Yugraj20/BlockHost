@@ -64,7 +64,7 @@ export class UpdaterService extends EventEmitter {
     if (owner === 'blockhost') owner = 'Yugraj20'
     if (repo === 'blockhost-releases') repo = 'BlockHost'
 
-    const currentVersion = app?.getVersion?.() || '0.1.0-beta'
+    const currentVersion = app?.getVersion?.() || '0.2.0-beta'
 
     if (!silent) {
       this.setState({ status: 'checking', message: `Checking ${owner}/${repo} for updates...` })
