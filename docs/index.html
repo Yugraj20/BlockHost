@@ -107,18 +107,18 @@
   <div class="fixed inset-0 pointer-events-none z-0 mesh-gradient"></div>
 
   <!-- Navigation Bar -->
-  <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-white/5 bg-[#0a0d14]/80 backdrop-blur-xl">
+  <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-white/5 bg-[#0a0d14]/85 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3 group">
-        <img src="assets/logo.png" alt="BlockHost Logo" class="w-9 h-9 rounded-xl shadow-lg transition-transform group-hover:scale-105" />
-        <div class="flex items-center gap-2">
-          <span class="font-extrabold text-lg tracking-tight text-white group-hover:text-emerald-400 transition-colors">BlockHost</span>
-          <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">v0.1.0-beta</span>
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+        <img src="assets/logo.png" alt="BlockHost Logo" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl shadow-lg transition-transform group-hover:scale-105" />
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <span class="font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-emerald-400 transition-colors">BlockHost</span>
+          <span class="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">v0.1.0-beta</span>
         </div>
       </a>
 
       <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+      <div class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium text-slate-300">
         <a href="#features" class="hover:text-emerald-400 transition-colors">Features</a>
         <a href="#simulator" class="hover:text-emerald-400 transition-colors">Interactive Demo</a>
         <a href="#engines" class="hover:text-emerald-400 transition-colors">7 Engines</a>
@@ -129,21 +129,43 @@
         </a>
       </div>
 
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/Yugraj20/BlockHost/releases/latest" class="relative group inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 transition-all shadow-lg shadow-emerald-500/25 active:scale-95">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+      <!-- Actions & Mobile Hamburger -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <a href="https://github.com/Yugraj20/BlockHost/releases/latest" class="hidden xs:inline-flex relative group items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 transition-all shadow-lg shadow-emerald-500/25 active:scale-95">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
           <span>Download Free</span>
+        </a>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Toggle Navigation Menu">
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-2.5 border-t border-white/5 bg-[#0a0d14]/95 backdrop-blur-2xl">
+      <a href="#features" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Features</a>
+      <a href="#simulator" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Interactive Demo</a>
+      <a href="#engines" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">7 Engines</a>
+      <a href="#comparison" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Comparison</a>
+      <a href="https://github.com/Yugraj20/BlockHost" target="_blank" rel="noreferrer" class="block py-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors">GitHub Repository</a>
+      <div class="pt-2">
+        <a href="https://github.com/Yugraj20/BlockHost/releases/latest" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-emerald-400 to-cyan-400">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <span>Download BlockHost for Windows (.exe)</span>
         </a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section with Interactive 3D Canvas -->
-  <section class="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden z-10">
-    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+  <section class="relative min-h-[85vh] flex items-center justify-center pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden z-10">
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
       
       <!-- Left Column: Copy & CTAs -->
-      <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+      <div class="lg:col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left">
         <!-- Badge Pill -->
         <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -153,44 +175,44 @@
         </div>
 
         <!-- Main Heading -->
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+        <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15] sm:leading-[1.1]">
           Your World. <br />
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Your Rules.</span>
         </h1>
 
-        <p class="text-base sm:text-xl text-slate-300 max-w-2xl leading-relaxed">
+        <p class="text-sm sm:text-base lg:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
           The ultimate desktop engine for creating, managing, modding, and tunneling Minecraft servers. 
           <span class="text-white font-medium">Zero port-forwarding</span>, automated Java setup, in-process playit.gg tunnels, and a 1-click Modrinth modpack ecosystem.
         </p>
 
         <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-          <a href="https://github.com/Yugraj20/BlockHost/releases/download/v0.1.0-beta/BlockHost.Setup.0.1.0-beta.exe" class="w-full sm:w-auto px-7 py-4 rounded-xl text-sm font-bold text-black bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 transition-all shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-3 group active:scale-95">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2">
+          <a href="https://github.com/Yugraj20/BlockHost/releases/download/v0.1.0-beta/BlockHost.Setup.0.1.0-beta.exe" class="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl text-sm font-bold text-black bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 transition-all shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-3 group active:scale-95">
+            <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
             <div class="text-left">
-              <div class="leading-none text-xs font-semibold text-black/75">Direct Download</div>
-              <div class="leading-none text-base font-extrabold text-black mt-1">BlockHost Setup (.exe)</div>
+              <div class="leading-none text-[11px] font-semibold text-black/75">Direct Download</div>
+              <div class="leading-none text-sm sm:text-base font-extrabold text-black mt-1">BlockHost Setup (.exe)</div>
             </div>
             <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
 
-          <a href="https://github.com/Yugraj20/BlockHost" target="_blank" rel="noreferrer" class="w-full sm:w-auto px-6 py-4 rounded-xl text-sm font-semibold text-slate-200 glass-card hover:bg-white/10 transition-all flex items-center justify-center gap-2.5">
-            <svg class="w-5 h-5 fill-current text-white" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <a href="https://github.com/Yugraj20/BlockHost" target="_blank" rel="noreferrer" class="w-full sm:w-auto px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl text-sm font-semibold text-slate-200 glass-card hover:bg-white/10 transition-all flex items-center justify-center gap-2.5">
+            <svg class="w-5 h-5 fill-current text-white shrink-0" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             <span>Star on GitHub</span>
           </a>
         </div>
 
         <!-- Micro stats -->
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-4 text-xs text-slate-400">
-          <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 pt-2 text-[11px] sm:text-xs text-slate-400">
+          <div class="flex items-center gap-1.5 sm:gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>Version 0.1.0-beta (~96.2 MB)</span>
+            <span>v0.1.0-beta (~96.2 MB)</span>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1.5 sm:gap-2">
             <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
             <span>100% Free & Open Source</span>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1.5 sm:gap-2">
             <span class="w-2 h-2 rounded-full bg-purple-400"></span>
             <span>Windows 10 / 11 64-bit</span>
           </div>
@@ -198,13 +220,13 @@
       </div>
 
       <!-- Right Column: Interactive 3D WebGL Canvas Scene -->
-      <div class="lg:col-span-5 relative flex items-center justify-center">
-        <div class="relative w-full aspect-square max-w-[500px]">
+      <div class="lg:col-span-5 relative flex items-center justify-center w-full">
+        <div class="relative w-full aspect-square max-w-[280px] xs:max-w-[340px] sm:max-w-[400px] lg:max-w-[460px] mx-auto">
           <!-- Ambient Glow Backdrop -->
           <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500/25 via-cyan-500/20 to-purple-500/25 rounded-full blur-3xl opacity-80 pointer-events-none"></div>
           
           <!-- 3D Canvas Container -->
-          <div id="three-container" class="relative w-full h-full cursor-grab active:cursor-grabbing select-none"></div>
+          <div id="three-container" class="relative w-full h-full cursor-grab active:cursor-grabbing select-none" style="touch-action: pan-y;"></div>
         </div>
       </div>
 
@@ -249,34 +271,34 @@
             <!-- 1. Engine Selector -->
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">1. Select Server Engine</label>
-              <div class="grid grid-cols-3 gap-2">
-                <button onclick="setEngine('paper', 'Paper 1.21.4', 'Recommended for high performance and plugins')" id="btn-paper" class="engine-btn p-2.5 rounded-xl border text-left transition-all bg-emerald-500/10 border-emerald-500/40 text-emerald-300">
-                  <div class="text-xs font-bold">Paper</div>
-                  <div class="text-[10px] text-slate-400">v1.21.4</div>
+              <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+                <button onclick="setEngine('paper', 'Paper 1.21.4', 'Recommended for high performance and plugins')" id="btn-paper" class="engine-btn p-2 sm:p-2.5 rounded-xl border text-left transition-all bg-emerald-500/10 border-emerald-500/40 text-emerald-300">
+                  <div class="text-[11px] sm:text-xs font-bold truncate">Paper</div>
+                  <div class="text-[9px] sm:text-[10px] text-slate-400">v1.21.4</div>
                 </button>
-                <button onclick="setEngine('fabric', 'Fabric 1.21.4', 'Modern modular modding engine')" id="btn-fabric" class="engine-btn p-2.5 rounded-xl border text-left transition-all border-white/10 hover:border-white/25 text-slate-300">
-                  <div class="text-xs font-bold">Fabric</div>
-                  <div class="text-[10px] text-slate-400">Mods</div>
+                <button onclick="setEngine('fabric', 'Fabric 1.21.4', 'Modern modular modding engine')" id="btn-fabric" class="engine-btn p-2 sm:p-2.5 rounded-xl border text-left transition-all border-white/10 hover:border-white/25 text-slate-300">
+                  <div class="text-[11px] sm:text-xs font-bold truncate">Fabric</div>
+                  <div class="text-[9px] sm:text-[10px] text-slate-400">Mods</div>
                 </button>
-                <button onclick="setEngine('vanilla', 'Vanilla 1.21.4', 'Official Mojang server binary')" id="btn-vanilla" class="engine-btn p-2.5 rounded-xl border text-left transition-all border-white/10 hover:border-white/25 text-slate-300">
-                  <div class="text-xs font-bold">Vanilla</div>
-                  <div class="text-[10px] text-slate-400">Official</div>
+                <button onclick="setEngine('vanilla', 'Vanilla 1.21.4', 'Official Mojang server binary')" id="btn-vanilla" class="engine-btn p-2 sm:p-2.5 rounded-xl border text-left transition-all border-white/10 hover:border-white/25 text-slate-300">
+                  <div class="text-[11px] sm:text-xs font-bold truncate">Vanilla</div>
+                  <div class="text-[9px] sm:text-[10px] text-slate-400">Official</div>
                 </button>
               </div>
             </div>
 
             <!-- 2. Proportional 5-Part RAM Slider -->
-            <div class="bg-black/30 p-4 rounded-xl border border-white/5 space-y-3">
+            <div class="bg-black/30 p-3.5 sm:p-4 rounded-xl border border-white/5 space-y-2.5 sm:space-y-3">
               <div class="flex justify-between items-center text-xs">
-                <span class="font-bold text-slate-300">2. Allocated RAM (-Xmx)</span>
-                <span id="slider-ram-val" class="font-bold text-emerald-400 font-mono">8192 MB (8.0 GB)</span>
+                <span class="font-bold text-slate-300 text-[11px] sm:text-xs">2. Allocated RAM (-Xmx)</span>
+                <span id="slider-ram-val" class="font-bold text-emerald-400 font-mono text-[11px] sm:text-xs">8192 MB (8.0 GB)</span>
               </div>
               
               <!-- Range Input -->
               <input type="range" id="ram-slider" min="1024" max="16384" step="512" value="8192" class="w-full accent-emerald-500 cursor-pointer">
               
               <!-- 5-Part Milestone Labels positioned mathematically -->
-              <div class="relative w-full h-5 mt-1 text-[10px]">
+              <div class="relative w-full h-5 mt-1 text-[9px] sm:text-[10px]">
                 <button onclick="setRam(1024)" class="ram-milestone absolute left-0 text-slate-400 hover:text-emerald-400">1 GB</button>
                 <button onclick="setRam(4096)" style="left: 20%; transform: translateX(-50%);" class="ram-milestone absolute text-slate-400 hover:text-emerald-400">4 GB</button>
                 <button onclick="setRam(8192)" style="left: 46.7%; transform: translateX(-50%);" class="ram-milestone absolute text-emerald-400 font-bold hover:text-emerald-400">8 GB</button>
@@ -286,24 +308,24 @@
             </div>
 
             <!-- 3. Tunneling Toggle -->
-            <div class="flex items-center justify-between p-4 rounded-xl bg-black/30 border border-white/5">
+            <div class="flex items-center justify-between p-3.5 sm:p-4 rounded-xl bg-black/30 border border-white/5">
               <div>
                 <div class="text-xs font-bold text-slate-200">3. Built-In playit.gg Tunnel</div>
-                <div class="text-[11px] text-slate-400">Share with friends without port-forwarding</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-400">Share with friends without port-forwarding</div>
               </div>
-              <label class="relative inline-flex items-center cursor-pointer">
+              <label class="relative inline-flex items-center cursor-pointer shrink-0">
                 <input type="checkbox" id="tunnel-toggle" checked onchange="toggleTunnel(this.checked)" class="sr-only peer">
-                <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                <div class="w-10 sm:w-11 h-5 sm:h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 sm:after:h-5 after:w-4 sm:after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
               </label>
             </div>
 
             <!-- Public Tunnel Domain Preview -->
-            <div id="tunnel-box" class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between">
-              <div class="truncate">
+            <div id="tunnel-box" class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+              <div class="truncate w-full sm:w-auto">
                 <div class="text-[10px] uppercase font-bold text-emerald-400">Public Join Address</div>
-                <div id="tunnel-addr" class="text-xs font-mono font-bold text-white">blockhost-demo.gl.joinmc.link</div>
+                <div id="tunnel-addr" class="text-[11px] sm:text-xs font-mono font-bold text-white truncate">blockhost-demo.gl.joinmc.link</div>
               </div>
-              <button onclick="copyTunnel()" id="copy-btn" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-black text-xs font-bold hover:bg-emerald-400 transition-colors">
+              <button onclick="copyTunnel()" id="copy-btn" class="w-full sm:w-auto shrink-0 px-3 py-1.5 rounded-lg bg-emerald-500 text-black text-xs font-bold hover:bg-emerald-400 transition-colors">
                 Copy
               </button>
             </div>
@@ -314,12 +336,12 @@
           <div class="lg:col-span-6 flex flex-col h-full">
             <div class="flex items-center justify-between pb-2 mb-2 border-b border-white/5 shrink-0">
               <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Server Terminal</span>
-              <button id="toggle-server-btn" onclick="toggleServer()" class="text-xs px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition-colors font-bold">
+              <button id="toggle-server-btn" onclick="toggleServer()" class="text-xs px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition-colors font-bold shrink-0">
                 Stop Server
               </button>
             </div>
             
-            <div id="terminal-body" class="bg-[#06080d] p-4 rounded-xl border border-white/5 font-mono text-[11px] text-slate-300 h-[340px] max-h-[340px] overflow-y-auto space-y-1.5 shadow-inner scroll-smooth">
+            <div id="terminal-body" class="bg-[#06080d] p-3 sm:p-4 rounded-xl border border-white/5 font-mono text-[10px] sm:text-[11px] text-slate-300 h-[270px] sm:h-[340px] max-h-[340px] overflow-y-auto space-y-1.5 shadow-inner scroll-smooth">
               <div class="text-slate-500">[12:00:00 INFO]: Loading Adoptium Temurin OpenJDK 21.0.6...</div>
               <div class="text-slate-500">[12:00:01 INFO]: Allocating 8192 MB JVM Heap with Aikar G1GC Flags...</div>
               <div class="text-emerald-400">[12:00:02 INFO]: Starting minecraft server version 1.21.4 (Paper)</div>
@@ -541,8 +563,11 @@
       </div>
 
       <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+        <div class="block sm:hidden text-center text-[10px] text-slate-500 py-2 border-b border-white/5">
+          ← Scroll horizontally to compare →
+        </div>
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs sm:text-sm">
+          <table class="w-full text-left text-xs sm:text-sm min-w-[560px]">
             <thead class="bg-black/40 text-slate-400 uppercase text-[10px] sm:text-xs tracking-wider border-b border-white/5">
               <tr>
                 <th class="p-4 sm:p-5">Feature</th>
@@ -645,8 +670,9 @@
       if (!container) return;
 
       const scene = new THREE.Scene();
+      const isMobile = window.innerWidth < 768;
       const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera.position.set(2.2, 1.8, 3.8);
+      camera.position.set(2.2, 1.8, isMobile ? 4.2 : 3.8);
       camera.lookAt(0, 0, 0);
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
@@ -885,38 +911,59 @@
         }
       });
 
-      // Touch Drag for Mobile
+      // Touch Drag for Mobile (distinguishes horizontal rotation from vertical scrolling)
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let isTouchRotating = false;
+
       container.addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) {
           isDragging = true;
-          prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          isTouchRotating = false;
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          prevMousePos = { x: touchStartX, y: touchStartY };
         }
       }, { passive: true });
 
       window.addEventListener('touchend', () => {
         isDragging = false;
+        isTouchRotating = false;
       });
 
       window.addEventListener('touchmove', (e) => {
         if (isDragging && e.touches.length === 1) {
           const deltaX = e.touches[0].clientX - prevMousePos.x;
           const deltaY = e.touches[0].clientY - prevMousePos.y;
-          targetRotationY += deltaX * 0.008;
-          targetRotationX += deltaY * 0.008;
+          const totalDeltaX = Math.abs(e.touches[0].clientX - touchStartX);
+          const totalDeltaY = Math.abs(e.touches[0].clientY - touchStartY);
+
+          if (!isTouchRotating && (totalDeltaX > 6 || totalDeltaY > 6)) {
+            if (totalDeltaX > totalDeltaY) {
+              isTouchRotating = true;
+            }
+          }
+
+          if (isTouchRotating) {
+            targetRotationY += deltaX * 0.008;
+            targetRotationX += deltaY * 0.005;
+          }
           prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         }
       }, { passive: true });
 
-      // Window Resize Listener
+      // Window Resize Listener with dynamic camera distance
       function onWindowResize() {
         if (!container) return;
-        const width = container.clientWidth || 400;
-        const height = container.clientHeight || 400;
+        const width = container.clientWidth || 320;
+        const height = container.clientHeight || 320;
         camera.aspect = width / height;
+        camera.position.z = window.innerWidth < 768 ? 4.2 : 3.8;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
       }
       window.addEventListener('resize', onWindowResize);
+      window.addEventListener('orientationchange', () => setTimeout(onWindowResize, 150));
       setTimeout(onWindowResize, 100);
 
       // Render Loop
@@ -1049,6 +1096,24 @@
         btn.className = 'text-xs px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition-colors font-bold';
         logToTerminal('[INFO]: Booting server JVM with Aikar G1GC flags...');
         logToTerminal('[INFO]: Server online! TPS: 20.0');
+      }
+    }
+
+    // Mobile Navigation Drawer Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const openIcon = document.getElementById('menu-icon-open');
+      const closeIcon = document.getElementById('menu-icon-close');
+      if (!menu) return;
+      const isHidden = menu.classList.contains('hidden');
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        if (openIcon) openIcon.classList.add('hidden');
+        if (closeIcon) closeIcon.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        if (openIcon) openIcon.classList.remove('hidden');
+        if (closeIcon) closeIcon.classList.add('hidden');
       }
     }
   </script>
