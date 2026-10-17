@@ -645,8 +645,8 @@
       if (!container) return;
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera.position.set(0, 0.8, 5.2);
+      const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.set(2.2, 1.8, 3.8);
       camera.lookAt(0, 0, 0);
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
@@ -664,12 +664,12 @@
       dirLight.position.set(6, 10, 8);
       scene.add(dirLight);
 
-      const cyanPoint = new THREE.PointLight(0x00f0ff, 2.5, 7);
-      cyanPoint.position.set(1.8, 0.9, 0.6);
+      const cyanPoint = new THREE.PointLight(0x00f0ff, 2.0, 5);
+      cyanPoint.position.set(1.1, 0.5, 0.4);
       scene.add(cyanPoint);
 
-      const rubyPoint = new THREE.PointLight(0xff2244, 2.0, 6);
-      rubyPoint.position.set(-1.6, -0.6, 0.8);
+      const rubyPoint = new THREE.PointLight(0xff2244, 1.8, 5);
+      rubyPoint.position.set(-1.0, -0.35, 0.5);
       scene.add(rubyPoint);
 
       // Main Group (Centered at 0, 0, 0)
@@ -816,29 +816,29 @@
         return new THREE.Mesh(new THREE.BoxGeometry(size, size, size), materials);
       }
 
-      // Center Hero Grass Block (1.4 size)
-      const grassBlock = makeTexturedCube(grassTopTex, grassSideTex, dirtTex, 1.4);
+      // Center Hero Grass Block (0.92 size - perfectly proportioned)
+      const grassBlock = makeTexturedCube(grassTopTex, grassSideTex, dirtTex, 0.92);
       grassBlock.position.set(0, 0, 0);
       mainGroup.add(grassBlock);
 
-      // Satellite Diamond Ore
-      const diamondBlock = makeTexturedCube(diamondTex, diamondTex, diamondTex, 0.85, 0x00f0ff, 0.5);
-      diamondBlock.position.set(1.7, 0.85, 0.5);
+      // Satellite Diamond Ore (0.42 size)
+      const diamondBlock = makeTexturedCube(diamondTex, diamondTex, diamondTex, 0.42, 0x00f0ff, 0.5);
+      diamondBlock.position.set(1.05, 0.42, 0.3);
       mainGroup.add(diamondBlock);
 
-      // Satellite Redstone Ore
-      const redstoneBlock = makeTexturedCube(redstoneTex, redstoneTex, redstoneTex, 0.8, 0xff2244, 0.6);
-      redstoneBlock.position.set(-1.6, -0.65, 0.7);
+      // Satellite Redstone Ore (0.40 size)
+      const redstoneBlock = makeTexturedCube(redstoneTex, redstoneTex, redstoneTex, 0.40, 0xff2244, 0.6);
+      redstoneBlock.position.set(-0.95, -0.32, 0.4);
       mainGroup.add(redstoneBlock);
 
-      // Satellite Crafting Table
-      const craftingBlock = makeTexturedCube(craftingSideTex, craftingSideTex, dirtTex, 0.75);
-      craftingBlock.position.set(-1.4, 1.25, -0.6);
+      // Satellite Crafting Table (0.38 size)
+      const craftingBlock = makeTexturedCube(craftingSideTex, craftingSideTex, dirtTex, 0.38);
+      craftingBlock.position.set(-0.75, 0.68, -0.35);
       mainGroup.add(craftingBlock);
 
-      // Satellite Gold Block
-      const goldBlock = makeTexturedCube(goldTex, goldTex, goldTex, 0.75, 0xfacc15, 0.2);
-      goldBlock.position.set(1.5, -0.95, -0.6);
+      // Satellite Gold Block (0.38 size)
+      const goldBlock = makeTexturedCube(goldTex, goldTex, goldTex, 0.38, 0xfacc15, 0.2);
+      goldBlock.position.set(0.85, -0.58, -0.35);
       mainGroup.add(goldBlock);
 
       // Ambient Particle Spark Field
@@ -934,11 +934,11 @@
           mainGroup.rotation.x += (targetRotationX - mainGroup.rotation.x) * 0.1;
         }
 
-        // Sub-block floating oscillations
-        diamondBlock.position.y = 0.85 + Math.sin(elapsed * 2 + 1) * 0.12;
-        redstoneBlock.position.y = -0.65 + Math.cos(elapsed * 2.2 + 2) * 0.1;
-        craftingBlock.position.y = 1.25 + Math.sin(elapsed * 1.8 + 3) * 0.1;
-        goldBlock.position.y = -0.95 + Math.cos(elapsed * 1.9 + 4) * 0.12;
+        // Sub-block gentle floating oscillations (tight amplitude within bounds)
+        diamondBlock.position.y = 0.42 + Math.sin(elapsed * 2.0 + 1) * 0.05;
+        redstoneBlock.position.y = -0.32 + Math.cos(elapsed * 2.2 + 2) * 0.05;
+        craftingBlock.position.y = 0.68 + Math.sin(elapsed * 1.8 + 3) * 0.05;
+        goldBlock.position.y = -0.58 + Math.cos(elapsed * 1.9 + 4) * 0.05;
 
         // Particle floating
         particles.rotation.y = elapsed * 0.035;
