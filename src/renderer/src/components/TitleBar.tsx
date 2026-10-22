@@ -34,7 +34,7 @@ export const TitleBar: React.FC = () => {
     <header className="h-9 bg-bh-panel/85 backdrop-blur-md border-b border-bh-border flex items-center justify-between px-3 select-none drag-region z-40">
       <div className="flex items-center gap-2 text-xs text-bh-muted">
         <span className="w-2 h-2 rounded-full bg-bh-accent animate-pulse" />
-        <span className="font-semibold text-bh-text">BlockHost Desktop Engine</span>
+        <span className="font-semibold text-bh-text">VoxelPulse Desktop Engine</span>
         <span className="text-[10px] px-2 py-0.5 rounded-full badge-accent font-bold">
           v0.2.0-beta
         </span>
@@ -113,7 +113,7 @@ export const TitleBar: React.FC = () => {
         {settings?.pinEnabled && (
           <button
             onClick={() => setLocked(true)}
-            title="Lock BlockHost (PIN)"
+            title="Lock VoxelPulse (PIN)"
             aria-label="Lock App"
             className="p-1.5 rounded-md text-bh-muted hover:text-amber-400 hover:bg-white/5 transition"
           >

@@ -128,7 +128,7 @@ export const BackupsPage: React.FC<BackupsPageProps> = ({ serverId, hideServerSe
           <div className="text-xs text-amber-200">
             <p className="font-bold">Restore Backup &quot;{confirmRestoreTarget.name}&quot;?</p>
             <p className="text-amber-300/80 mt-0.5">
-              BlockHost will automatically take a Pre-Restore Safety Snapshot before restoring.
+              VoxelPulse will automatically take a Pre-Restore Safety Snapshot before restoring.
             </p>
           </div>
           <div className="flex items-center gap-2">

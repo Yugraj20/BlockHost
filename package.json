@@ -1,9 +1,9 @@
 {
-  "name": "blockhost",
+  "name": "voxelpulse",
   "version": "0.2.0-beta",
-  "description": "BlockHost - Minecraft Server Hosting & Management Platform",
+  "description": "VoxelPulse - High-Performance Minecraft Server Engine & Control Station",
   "main": "./out/main/index.js",
-  "author": "BlockHost Team",
+  "author": "VoxelPulse Team",
   "license": "MIT",
   "scripts": {
     "dev": "electron-vite dev",

@@ -144,7 +144,7 @@ export class JavaManager {
     logger.info(`Fetching Adoptium metadata for Temurin ${majorVersion}: ${apiUrl}`)
 
     const res = await fetch(apiUrl, {
-      headers: { 'User-Agent': 'BlockHost/1.0.0' }
+      headers: { 'User-Agent': 'VoxelPulse/1.0.0' }
     })
     if (!res.ok) {
       throw new Error(`Adoptium API returned HTTP ${res.status} for Java ${majorVersion}`)
@@ -189,7 +189,7 @@ export class JavaManager {
       return preferredPath
     }
 
-    const requiredMajor = JavaManager.getRequiredJavaVersion(mcVersion)
+    const requiredMajor = JavaManager.getRequiredJavaVersion(mcVersion) as 8 | 17 | 21 | 25
     const installed = await this.detectInstallations()
 
     // Exact match first, otherwise any compatible higher version
@@ -199,7 +199,16 @@ export class JavaManager {
     const compatible = installed.find((j) => j.majorVersion >= requiredMajor)
     if (compatible) return compatible.path
 
-    // If none found, fallback to first installed or 'java'
+    // Automatically download & provision matching Eclipse Temurin JRE if no compatible version is found
+    try {
+      logger.info(`No compatible Java ${requiredMajor} found on system. Automatically installing Eclipse Temurin JRE ${requiredMajor}...`)
+      const autoInstalled = await this.installTemurin(requiredMajor)
+      if (autoInstalled?.path) return autoInstalled.path
+    } catch (err) {
+      logger.warn(`Automatic Temurin installation failed (${(err as Error).message}), falling back to PATH java`)
+    }
+
+    // If none found and auto-install failed, fallback to first installed or system 'java'
     if (installed.length > 0) return installed[0].path
     return 'java'
   }

@@ -7,6 +7,7 @@ import { resolveSafePath, hashPin, verifyPin, encryptSecret, decryptSecret } fro
 import { JavaManager } from '../src/main/services/JavaManager'
 import { ZipService } from '../src/main/services/ZipService'
 import { PLAYIT_API_BASE } from '../src/shared/constants'
+import { SERVER_PRESETS } from '../src/renderer/src/pages/CreateServerPage'
 import {
   PlayitProtoCodec,
   MessageCodec,
@@ -17,7 +18,7 @@ import {
   UDP_CHANNEL_ESTABLISH_ID
 } from '../src/main/services/playit/PlayitProtoCodec'
 
-describe('BlockHost Core & Live Integration Suite', () => {
+describe('VoxelPulse Core & Live Integration Suite', () => {
   it('blocks path traversal outside server root directory', () => {
     const root = path.resolve('C:/BlockHost/servers/test')
     const valid = resolveSafePath(root, 'logs/latest.log')
@@ -178,5 +179,43 @@ describe('BlockHost Core & Live Integration Suite', () => {
       downloads: { 'server:default'?: { url: string; checksums?: { sha256?: string } } }
     }>
     expect(builds[0]?.downloads?.['server:default']?.url).toContain('fill-data.papermc.io')
+  })
+
+  it('correctly matches player join, leave, and UUID regexes including GeyserMC/Floodgate Bedrock names', () => {
+    const uuidRegex = /(?:UUID of player|User)\s+([A-Za-z0-9_.*-]{1,20})\s+(?:\([^)]*\)\s+)?(?:is|has UUID)\s+([0-9a-fA-F-]{32,36})/
+    const joinRegex = /(?:\[Server thread\/INFO\]|\[Server-Worker-[^\]]+\]|\]):\s+([A-Za-z0-9_.*-]{1,20})\s+(?:joined the game|logged in)/
+    const leaveRegex = /(?:\[Server thread\/INFO\]|\[Server-Worker-[^\]]+\]|\]):\s+([A-Za-z0-9_.*-]{1,20})\s+(?:left the game|lost connection)/
+
+    // Standard Java Player
+    const javaJoin = '[19:12:00] [Server thread/INFO]: Alex joined the game'
+    expect(javaJoin.match(joinRegex)?.[1]).toBe('Alex')
+
+    // Bedrock / GeyserMC Player with dot prefix
+    const bedrockJoin = '[19:12:05] [Server thread/INFO]: .Steve_Xbox joined the game'
+    expect(bedrockJoin.match(joinRegex)?.[1]).toBe('.Steve_Xbox')
+
+    // Floodgate Player with star prefix
+    const floodgateLeave = '[19:14:10] [Server thread/INFO]: *Alex123 left the game'
+    expect(floodgateLeave.match(leaveRegex)?.[1]).toBe('*Alex123')
+
+    // UUID log matching
+    const uuidLine = '[19:12:05] [Server thread/INFO]: UUID of player .Steve_Xbox is 00000000-0000-0000-0009-01f28b7e2831'
+    const uuidMatched = uuidLine.match(uuidRegex)
+    expect(uuidMatched?.[1]).toBe('.Steve_Xbox')
+    expect(uuidMatched?.[2]).toBe('00000000-0000-0000-0009-01f28b7e2831')
+  })
+
+  it('validates server creation presets & templates configurations', () => {
+    expect(SERVER_PRESETS.length).toBeGreaterThanOrEqual(4)
+    for (const preset of SERVER_PRESETS) {
+      expect(preset.id).toBeTruthy()
+      expect(preset.name).toBeTruthy()
+      expect(preset.software).toMatch(/paper|vanilla|purpur|fabric|forge|neoforge|quilt/)
+      expect(preset.ramMb).toBeGreaterThanOrEqual(1024)
+      expect(['survival', 'creative', 'adventure', 'spectator']).toContain(preset.gamemode)
+      expect(['peaceful', 'easy', 'normal', 'hard']).toContain(preset.difficulty)
+      expect(preset.maxPlayers).toBeGreaterThan(0)
+      expect(preset.motd).toBeTruthy()
+    }
   })
 })

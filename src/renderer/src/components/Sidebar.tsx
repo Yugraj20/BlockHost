@@ -40,13 +40,13 @@ export const Sidebar: React.FC = () => {
           <div className="flex items-center gap-3">
             <img
               src="./logo.png"
-              alt="BlockHost Cube Logo"
+              alt="VoxelPulse Cube Logo"
               className="w-10 h-10 rounded-xl shadow-lg shrink-0"
             />
             {!collapsed && (
               <div>
                 <h1 className="text-lg font-extrabold tracking-tight text-bh-text leading-none">
-                  BlockHost
+                  VoxelPulse
                 </h1>
                 <p className="text-[10px] font-semibold tracking-widest text-bh-accent uppercase mt-1">
                   SERVER ENGINE

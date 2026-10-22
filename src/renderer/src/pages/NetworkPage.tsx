@@ -78,7 +78,7 @@ export const NetworkPage: React.FC<NetworkPageProps> = ({ serverId, hideServerSe
               </span>
             </div>
             <p className="text-xs text-bh-muted mt-0.5">
-              Host public Minecraft servers without port forwarding — runs directly inside BlockHost with zero external agent processes.
+              Host public Minecraft servers without port forwarding — runs directly inside VoxelPulse with zero external agent processes.
             </p>
           </div>
         </div>

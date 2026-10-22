@@ -28,9 +28,18 @@ export class ConfigService {
   private data: PersistedDatabase
 
   constructor() {
-    this.baseDir = app?.isReady?.()
-      ? path.join(app.getPath('appData'), 'BlockHost')
-      : path.join(process.env.APPDATA || path.resolve('.'), 'BlockHost')
+    const rootAppData = app?.isReady?.()
+      ? app.getPath('appData')
+      : (process.env.APPDATA || path.resolve('.'))
+    const legacyDir = path.join(rootAppData, 'BlockHost')
+    const primaryDir = path.join(rootAppData, 'VoxelPulse')
+
+    // If legacy BlockHost directory exists and new VoxelPulse dir does not, keep existing user data seamlessly
+    if (fs.existsSync(legacyDir) && !fs.existsSync(primaryDir)) {
+      this.baseDir = legacyDir
+    } else {
+      this.baseDir = primaryDir
+    }
 
     fs.mkdirSync(this.baseDir, { recursive: true })
     this.configFile = path.join(this.baseDir, 'config.json')

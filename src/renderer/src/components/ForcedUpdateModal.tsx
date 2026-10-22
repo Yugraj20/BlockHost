@@ -61,7 +61,7 @@ export const ForcedUpdateModal: React.FC = () => {
             New Version Available!
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
-            A critical update for BlockHost is available. To keep your Minecraft servers, automated Java runtimes, and playit.gg tunnels running reliably, you must update before continuing.
+            A critical update for VoxelPulse is available. To keep your Minecraft servers, automated Java runtimes, and playit.gg tunnels running reliably, you must update before continuing.
           </p>
         </div>
 
@@ -113,10 +113,10 @@ export const ForcedUpdateModal: React.FC = () => {
               type="button"
               onClick={handleQuit}
               className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-rose-400 transition-colors font-medium"
-              title="Close BlockHost"
+              title="Close VoxelPulse"
             >
               <LogOut className="w-3.5 h-3.5" />
-              <span>Quit BlockHost</span>
+              <span>Quit VoxelPulse</span>
             </button>
           </div>
         </div>

@@ -225,7 +225,7 @@ export const SettingsPage: React.FC = () => {
                 Java Runtime Manager (Eclipse Temurin / Adoptium API)
               </h3>
               <p className="text-xs text-bh-muted">
-                BlockHost automatically selects Java 8 for MC ≤1.16.5, Java 17 for 1.17–1.20.4, and Java 21+ for 1.20.5+.
+                VoxelPulse automatically selects Java 8 for MC ≤1.16.5, Java 17 for 1.17–1.20.4, and Java 21+ for 1.20.5+.
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -273,7 +273,7 @@ export const SettingsPage: React.FC = () => {
                     </span>
                     {j.managed && (
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold">
-                        Managed by BlockHost
+                        Managed by VoxelPulse
                       </span>
                     )}
                   </div>
@@ -409,7 +409,7 @@ export const SettingsPage: React.FC = () => {
                   onChange={(e) => updateSettings({ minimizeToTray: e.target.checked })}
                   className="accent-emerald-500"
                 />
-                Minimize BlockHost to Windows System Tray when closing window
+                Minimize VoxelPulse to Windows System Tray when closing window
               </label>
               <label className="flex items-center gap-2 text-xs text-bh-text cursor-pointer">
                 <input
@@ -418,7 +418,7 @@ export const SettingsPage: React.FC = () => {
                   onChange={(e) => updateSettings({ launchOnStartup: e.target.checked })}
                   className="accent-emerald-500"
                 />
-                Launch BlockHost automatically at Windows login
+                Launch VoxelPulse automatically at Windows login
               </label>
             </div>
           </div>
@@ -490,7 +490,7 @@ export const SettingsPage: React.FC = () => {
           )}
 
           <div>
-            <p className="text-xs font-bold text-bh-text mb-2">Application Log (`blockhost.log`)</p>
+            <p className="text-xs font-bold text-bh-text mb-2">Application Log (`voxelpulse.log`)</p>
             <div className="h-60 overflow-y-auto bg-[#070b13] border border-bh-border rounded-xl p-3 font-mono text-xs text-slate-300 space-y-0.5 select-text">
               {appLogs.map((l, idx) => (
                 <div key={idx}>{l}</div>

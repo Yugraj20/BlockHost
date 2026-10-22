@@ -45,7 +45,7 @@ export class ServerManager extends EventEmitter {
     for (const server of this.config.getServers()) {
       this.states.set(server.id, this.createInitialRuntimeState(server))
       this.consoleLogs.set(server.id, [
-        `[BlockHost] Server "${server.name}" (${server.software} ${server.version}) ready.`
+        `[VoxelPulse] Server "${server.name}" (${server.software} ${server.version}) ready.`
       ])
       this.setupAutoRestartCron(server)
     }
@@ -180,7 +180,7 @@ export class ServerManager extends EventEmitter {
       directory,
       thumbnail: input.thumbnail || `bg-${(this.config.getServers().length % 16) + 1}`,
       maxPlayers: input.maxPlayers,
-      motd: input.motd || `${input.name} - Powered by BlockHost`,
+      motd: input.motd || `${input.name} - Powered by VoxelPulse`,
       gamemode: input.gamemode,
       difficulty: input.difficulty,
       onlineMode: true,
@@ -216,14 +216,14 @@ export class ServerManager extends EventEmitter {
     state.status = 'installing'
     this.states.set(id, state)
     this.consoleLogs.set(id, [
-      `[BlockHost] Creating server "${server.name}" (${server.software} ${server.version})...`
+      `[VoxelPulse] Creating server "${server.name}" (${server.software} ${server.version})...`
     ])
     this.config.upsertServer(server)
     this.emitStateUpdate()
 
     try {
       const javaBin = await this.javaManager.resolveJavaForServer(server.version, server.javaPath)
-      this.appendConsole(id, `[BlockHost] Downloading ${server.software} ${server.version}...`)
+      this.appendConsole(id, `[VoxelPulse] Downloading ${server.software} ${server.version}...`)
       const installed = await this.providerService.installServerJar({
         software: server.software,
         version: server.version,
@@ -235,7 +235,7 @@ export class ServerManager extends EventEmitter {
       this.config.upsertServer(server)
 
       state.status = 'offline'
-      this.appendConsole(id, `[BlockHost] Installation complete (${server.jarFile}). Ready to start!`)
+      this.appendConsole(id, `[VoxelPulse] Installation complete (${server.jarFile}). Ready to start!`)
       this.config.addActivity({
         serverId: server.id,
         serverName: server.name,
@@ -249,7 +249,7 @@ export class ServerManager extends EventEmitter {
       state.status = 'offline'
       this.appendConsole(
         id,
-        `[BlockHost/WARN] Could not download jar right now (${(err as Error).message}). You can retry or place server.jar manually.`
+        `[VoxelPulse/WARN] Could not download jar right now (${(err as Error).message}). You can retry or place server.jar manually.`
       )
       this.emitStateUpdate()
       return server
@@ -359,7 +359,7 @@ export class ServerManager extends EventEmitter {
     }
 
     this.states.set(id, this.createInitialRuntimeState(server))
-    this.consoleLogs.set(id, [`[BlockHost] Imported server "${server.name}" from ${sourcePath}`])
+    this.consoleLogs.set(id, [`[VoxelPulse] Imported server "${server.name}" from ${sourcePath}`])
     this.config.upsertServer(server)
     this.config.addActivity({
       serverId: server.id,
@@ -395,7 +395,7 @@ export class ServerManager extends EventEmitter {
     if (!server.jarFile.startsWith('@') && !fs.existsSync(jarFullPath)) {
       // Attempt on-demand download if jar is missing
       const javaForInstall = await this.javaManager.resolveJavaForServer(server.version, server.javaPath)
-      this.appendConsole(serverId, `[BlockHost] Server JAR missing, downloading ${server.software} ${server.version}...`)
+      this.appendConsole(serverId, `[VoxelPulse] Server JAR missing, downloading ${server.software} ${server.version}...`)
       const installed = await this.providerService.installServerJar({
         software: server.software,
         version: server.version,
@@ -439,7 +439,7 @@ export class ServerManager extends EventEmitter {
 
     this.appendConsole(
       serverId,
-      `[BlockHost] Starting ${server.name} with Java: "${javaBin}" (-Xmx${server.ramMb}M) on port ${server.port}`
+      `[VoxelPulse] Starting ${server.name} with Java: "${javaBin}" (-Xmx${server.ramMb}M) on port ${server.port}`
     )
 
     const child = spawn(javaBin, args, {
@@ -467,7 +467,7 @@ export class ServerManager extends EventEmitter {
     child.stderr.on('data', handleChunk)
 
     child.on('error', (err) => {
-      this.appendConsole(serverId, `[BlockHost/ERROR] Process error: ${err.message}`)
+      this.appendConsole(serverId, `[VoxelPulse/ERROR] Process error: ${err.message}`)
     })
 
     child.on('close', (code) => {
@@ -486,7 +486,7 @@ export class ServerManager extends EventEmitter {
         state.status = 'crashed'
         state.crashLoopCount += 1
         state.lastCrashReport = this.readLatestCrashReport(server.directory)
-        this.appendConsole(serverId, `[BlockHost/CRASH] Server exited abnormally with code ${code}.`)
+        this.appendConsole(serverId, `[VoxelPulse/CRASH] Server exited abnormally with code ${code}.`)
 
         this.config.addActivity({
           serverId: server.id,
@@ -507,7 +507,7 @@ export class ServerManager extends EventEmitter {
           const delaySec = Math.min(30, state.crashLoopCount * 5)
           this.appendConsole(
             serverId,
-            `[BlockHost/Recovery] Auto-restarting in ${delaySec}s (Attempt ${state.crashLoopCount}/${server.autoRestartMaxRetries})...`
+            `[VoxelPulse/Recovery] Auto-restarting in ${delaySec}s (Attempt ${state.crashLoopCount}/${server.autoRestartMaxRetries})...`
           )
           setTimeout(() => {
             if (!this.processes.has(serverId)) {
@@ -520,7 +520,7 @@ export class ServerManager extends EventEmitter {
       } else {
         state.status = 'offline'
         state.crashLoopCount = 0
-        this.appendConsole(serverId, `[BlockHost] Server stopped (code ${code ?? 0}).`)
+        this.appendConsole(serverId, `[VoxelPulse] Server stopped (code ${code ?? 0}).`)
         this.config.addActivity({
           serverId: server.id,
           serverName: server.name,
@@ -549,8 +549,8 @@ export class ServerManager extends EventEmitter {
       this.emitStateUpdate()
     }
 
-    // 2. Player UUID authenticator log
-    const uuidMatch = line.match(/UUID of player ([A-Za-z0-9_]{2,16}) is ([0-9a-fA-F-]{32,36})/)
+    // 2. Player UUID authenticator log (supports Java and Geyser/Floodgate Bedrock names)
+    const uuidMatch = line.match(/(?:UUID of player|User)\s+([A-Za-z0-9_.*-]{1,20})\s+(?:\([^)]*\)\s+)?(?:is|has UUID)\s+([0-9a-fA-F-]{32,36})/)
     if (uuidMatch) {
       const [, name, uuid] = uuidMatch
       const existing = state.playersOnline.find((p) => p.name.toLowerCase() === name.toLowerCase())
@@ -563,7 +563,7 @@ export class ServerManager extends EventEmitter {
     }
 
     // 3. Player joined the game
-    const joinMatch = line.match(/\]:\s+([A-Za-z0-9_]{2,16}) joined the game/)
+    const joinMatch = line.match(/(?:\[Server thread\/INFO\]|\[Server-Worker-[^\]]+\]|\]):\s+([A-Za-z0-9_.*-]{1,20})\s+(?:joined the game|logged in)/)
     if (joinMatch) {
       const name = joinMatch[1]
       if (!state.playersOnline.some((p) => p.name.toLowerCase() === name.toLowerCase())) {
@@ -586,7 +586,7 @@ export class ServerManager extends EventEmitter {
     }
 
     // 4. Player left the game
-    const leaveMatch = line.match(/\]:\s+([A-Za-z0-9_]{2,16}) (?:left the game|lost connection)/)
+    const leaveMatch = line.match(/(?:\[Server thread\/INFO\]|\[Server-Worker-[^\]]+\]|\]):\s+([A-Za-z0-9_.*-]{1,20})\s+(?:left the game|lost connection)/)
     if (leaveMatch) {
       const name = leaveMatch[1]
       state.playersOnline = state.playersOnline.filter(
@@ -602,8 +602,23 @@ export class ServerManager extends EventEmitter {
       this.emitStateUpdate()
     }
 
-    // 5. TPS parsing from Paper/Purpur `/tps` output
-    const tpsMatch = line.match(/TPS from last 1m, 5m, 15m:\s*\*?([\d.]+)/i)
+    // 5. Online player list output (e.g. from `/list` or server query)
+    const listMatch = line.match(/There are \d+ of a max of \d+ players online:\s*(.*)/i)
+    if (listMatch) {
+      const rawList = listMatch[1].trim()
+      if (rawList) {
+        const names = rawList.split(',').map((s) => s.trim()).filter(Boolean)
+        const currentMap = new Map(state.playersOnline.map((p) => [p.name.toLowerCase(), p]))
+        state.playersOnline = names.map((n) => currentMap.get(n.toLowerCase()) || { name: n, uuid: '', joinedAt: Date.now() })
+      } else {
+        state.playersOnline = []
+      }
+      this.emitStateUpdate()
+    }
+
+    // 6. TPS parsing from Paper/Purpur `/tps` output (stripping terminal ANSI and section color formatting)
+    const cleanLine = line.replace(/\x1b\[[0-9;]*m|§[0-9a-fk-or]/gi, '')
+    const tpsMatch = cleanLine.match(/TPS from last 1m, 5m, 15m:\s*\*?([\d.]+)/i)
     if (tpsMatch) {
       const parsed = parseFloat(tpsMatch[1])
       if (!isNaN(parsed)) state.tps = Math.min(20, parsed)
@@ -629,7 +644,7 @@ export class ServerManager extends EventEmitter {
   public sendCommand(serverId: string, command: string): void {
     const proc = this.processes.get(serverId)
     if (!proc || !proc.stdin.writable) {
-      this.appendConsole(serverId, `[BlockHost/WARN] Cannot send command: server is not running.`)
+      this.appendConsole(serverId, `[VoxelPulse/WARN] Cannot send command: server is not running.`)
       return
     }
     const clean = command.replace(/^\//, '').trim()
@@ -655,7 +670,7 @@ export class ServerManager extends EventEmitter {
     await new Promise<void>((resolve) => {
       const timeout = setTimeout(() => {
         if (this.processes.has(serverId)) {
-          this.appendConsole(serverId, `[BlockHost] Force-terminating unresponsive server process...`)
+          this.appendConsole(serverId, `[VoxelPulse] Force-terminating unresponsive server process...`)
           if (process.platform === 'win32' && proc.pid) {
             try {
               execFileSync('taskkill', ['/pid', String(proc.pid), '/t', '/f'], {
@@ -742,7 +757,7 @@ export class ServerManager extends EventEmitter {
       'level-name': server.levelName
     }
 
-    const lines = ['#Minecraft server properties', `#Managed by BlockHost - ${new Date().toISOString()}`]
+    const lines = ['#Minecraft server properties', `#Managed by VoxelPulse - ${new Date().toISOString()}`]
     for (const [k, v] of Object.entries(merged)) {
       lines.push(`${k}=${v}`)
     }
@@ -868,7 +883,7 @@ export class ServerManager extends EventEmitter {
     const current = this.getBans(serverId)
     const entry: BanEntry = {
       created: new Date().toISOString(),
-      source: 'BlockHost Console',
+      source: 'VoxelPulse Console',
       expires: 'forever',
       reason
     }
@@ -919,8 +934,8 @@ export class ServerManager extends EventEmitter {
     if (server.autoRestartScheduleCron && cron.validate(server.autoRestartScheduleCron)) {
       const job = cron.schedule(server.autoRestartScheduleCron, () => {
         if (this.processes.has(server.id)) {
-          this.appendConsole(server.id, `[BlockHost] Scheduled auto-restart triggered.`)
-          this.sendCommand(server.id, 'say [BlockHost] Scheduled server restart in 10 seconds!')
+          this.appendConsole(server.id, `[VoxelPulse] Scheduled auto-restart triggered.`)
+          this.sendCommand(server.id, 'say [VoxelPulse] Scheduled server restart in 10 seconds!')
           setTimeout(() => this.restartServer(server.id), 10000)
         }
       })
@@ -962,7 +977,7 @@ export class ServerManager extends EventEmitter {
           ) {
             this.appendConsole(
               serverId,
-              `[BlockHost/Guard] RAM usage (${state.ramUsedMb} MB) exceeded ${srv.autoRestartRamLimitPercent}% threshold. Restarting...`
+              `[VoxelPulse/Guard] RAM usage (${state.ramUsedMb} MB) exceeded ${srv.autoRestartRamLimitPercent}% threshold. Restarting...`
             )
             this.restartServer(serverId).catch(() => {})
           }

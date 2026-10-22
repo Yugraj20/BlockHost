@@ -1,5 +1,5 @@
-appId: com.blockhost.app
-productName: BlockHost
+appId: com.voxelpulse.app
+productName: VoxelPulse
 directories:
   buildResources: build
   output: dist
@@ -16,7 +16,7 @@ extraResources:
     filter:
       - '**/*'
 win:
-  executableName: BlockHost
+  executableName: VoxelPulse
   icon: build/icon.ico
   target:
     - target: nsis
@@ -27,8 +27,8 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: always
   createStartMenuShortcut: true
-  shortcutName: BlockHost
-  uninstallDisplayName: BlockHost Minecraft Server Manager
+  shortcutName: VoxelPulse
+  uninstallDisplayName: VoxelPulse Minecraft Server Manager
   include: build/installer.nsh
   deleteAppDataOnUninstall: false
 publish:

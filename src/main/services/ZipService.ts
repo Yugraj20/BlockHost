@@ -24,7 +24,7 @@ export class ZipService {
             return reject(secErr)
           }
 
-          if (/\/$/.test(entry.fileName)) {
+          if (/[/\\]$/.test(entry.fileName)) {
             fs.mkdirSync(destPath, { recursive: true })
             zipfile.readEntry()
           } else {

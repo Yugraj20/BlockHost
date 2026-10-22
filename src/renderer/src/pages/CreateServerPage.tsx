@@ -8,11 +8,100 @@ import {
   RefreshCw,
   HardDrive,
   Network,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Wand2
 } from 'lucide-react'
 import { ServerSoftware } from '../../../shared/types'
 import { useAppStore } from '../stores/useAppStore'
 import { getRamMilestones } from '../utils/ramMilestones'
+
+export interface ServerPreset {
+  id: string
+  name: string
+  tagline: string
+  software: ServerSoftware
+  ramMb: number
+  gamemode: 'survival' | 'creative' | 'adventure' | 'spectator'
+  difficulty: 'peaceful' | 'easy' | 'normal' | 'hard'
+  maxPlayers: number
+  motd: string
+  aikarFlags: boolean
+  thumbnail: string
+  badge: string
+}
+
+export const SERVER_PRESETS: ServerPreset[] = [
+  {
+    id: 'survival-friends',
+    name: 'Survival with Friends',
+    tagline: 'Paper high-performance engine tuned for multiplayer survival',
+    software: 'paper',
+    ramMb: 4096,
+    gamemode: 'survival',
+    difficulty: 'normal',
+    maxPlayers: 20,
+    motd: 'Cozy Survival Realm — Powered by VoxelPulse',
+    aikarFlags: true,
+    thumbnail: 'bg-3',
+    badge: 'Popular'
+  },
+  {
+    id: 'fabric-modded',
+    name: 'Fabric Modded Realm',
+    tagline: 'Lightweight, modern mod loader ready for performance mods & shaders',
+    software: 'fabric',
+    ramMb: 6144,
+    gamemode: 'survival',
+    difficulty: 'normal',
+    maxPlayers: 12,
+    motd: 'Modern Fabric Modded World — Powered by VoxelPulse',
+    aikarFlags: true,
+    thumbnail: 'bg-7',
+    badge: 'Modded'
+  },
+  {
+    id: 'creative-sandbox',
+    name: 'Creative & Redstone Lab',
+    tagline: 'Peaceful Purpur world with unlimited building and redstone experimentation',
+    software: 'purpur',
+    ramMb: 4096,
+    gamemode: 'creative',
+    difficulty: 'peaceful',
+    maxPlayers: 15,
+    motd: 'Creative Builders & Redstone Lab — Powered by VoxelPulse',
+    aikarFlags: true,
+    thumbnail: 'bg-10',
+    badge: 'Creative'
+  },
+  {
+    id: 'hardcore-challenge',
+    name: 'Hardcore Challenge',
+    tagline: 'High-stakes Paper survival on Hard difficulty with one life only',
+    software: 'paper',
+    ramMb: 4096,
+    gamemode: 'survival',
+    difficulty: 'hard',
+    maxPlayers: 8,
+    motd: 'Hardcore Survival Challenge: One Life Only!',
+    aikarFlags: true,
+    thumbnail: 'bg-14',
+    badge: 'Hardcore'
+  },
+  {
+    id: 'vanilla-purist',
+    name: 'Pure Vanilla Mojang',
+    tagline: 'Unmodified official Mojang server for authentic vanilla mechanics',
+    software: 'vanilla',
+    ramMb: 2048,
+    gamemode: 'survival',
+    difficulty: 'normal',
+    maxPlayers: 10,
+    motd: 'Pure Vanilla Minecraft — Powered by VoxelPulse',
+    aikarFlags: false,
+    thumbnail: 'bg-1',
+    badge: 'Vanilla'
+  }
+]
 
 const SOFTWARE_OPTIONS: {
   id: ServerSoftware
@@ -84,14 +173,29 @@ export const CreateServerPage: React.FC = () => {
   const [portFree, setPortFree] = useState(true)
   const [ramMb, setRamMb] = useState(4096)
   const [maxPlayers, setMaxPlayers] = useState(20)
-  const [motd, setMotd] = useState('A BlockHost Minecraft Server')
+  const [motd, setMotd] = useState('A VoxelPulse Minecraft Server')
   const [gamemode, setGamemode] = useState<'survival' | 'creative' | 'adventure' | 'spectator'>('survival')
   const [difficulty, setDifficulty] = useState<'peaceful' | 'easy' | 'normal' | 'hard'>('normal')
   const [aikarFlags, setAikarFlags] = useState(true)
-  const [thumbnail, setThumbnail] = useState('bg-1')
+  const [thumbnail, setThumbnail] = useState('bg-3')
   const [eulaAccepted, setEulaAccepted] = useState(true)
   const [creating, setCreating] = useState(false)
   const [error, setError] = useState('')
+  const [selectedPreset, setSelectedPreset] = useState<string | null>('survival-friends')
+
+  const applyPreset = (preset: ServerPreset) => {
+    setSelectedPreset(preset.id)
+    setName(preset.name)
+    setSoftware(preset.software)
+    const clampedRam = Math.min(Math.max(preset.ramMb, minRamMb), maxRamMb)
+    setRamMb(clampedRam)
+    setGamemode(preset.gamemode)
+    setDifficulty(preset.difficulty)
+    setMaxPlayers(preset.maxPlayers)
+    setMotd(preset.motd)
+    setAikarFlags(preset.aikarFlags)
+    setThumbnail(preset.thumbnail)
+  }
 
   useEffect(() => {
     let mounted = true
@@ -204,6 +308,55 @@ export const CreateServerPage: React.FC = () => {
       )}
 
       <form onSubmit={handleCreate} className="space-y-6">
+        {/* Quick Setup Presets */}
+        <div className="bg-bh-card/90 border border-bh-border rounded-2xl p-5 space-y-3.5 shadow-xl">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Wand2 className="w-5 h-5 text-amber-400" />
+              <h3 className="text-sm font-bold text-bh-text">Quick Setup Presets & Templates</h3>
+            </div>
+            <span className="text-[11px] text-bh-muted">1-click to pre-fill optimal software, memory & gameplay settings</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            {SERVER_PRESETS.map((preset) => {
+              const isSelected = selectedPreset === preset.id
+              return (
+                <button
+                  type="button"
+                  key={preset.id}
+                  onClick={() => applyPreset(preset)}
+                  className={`p-3.5 rounded-xl border text-left transition-all flex flex-col justify-between group ${
+                    isSelected
+                      ? 'bg-emerald-500/15 border-emerald-500 ring-1 ring-emerald-500/40 shadow-lg shadow-emerald-500/10'
+                      : 'bg-bh-panel border-bh-border hover:border-white/20'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-1 mb-1.5">
+                      <span className="text-xs font-bold text-bh-text group-hover:text-emerald-300 transition-colors">
+                        {preset.name}
+                      </span>
+                      <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold ${
+                        isSelected ? 'bg-emerald-500 text-black' : 'bg-white/10 text-slate-300'
+                      }`}>
+                        {preset.badge}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-bh-muted leading-relaxed mb-3">
+                      {preset.tagline}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono pt-2 border-t border-white/5">
+                    <span className="capitalize">{preset.software}</span>
+                    <span className="text-emerald-400 font-semibold">{preset.ramMb / 1024} GB RAM</span>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
         {/* Step 1: Server Software */}
         <div className="bg-bh-card/90 border border-bh-border rounded-2xl p-5 space-y-4 shadow-xl">
           <h3 className="text-sm font-bold text-bh-text">1. Select Server Software</h3>
@@ -269,6 +422,17 @@ export const CreateServerPage: React.FC = () => {
                     </option>
                   ))}
                 </select>
+                <div className="text-[10px] text-emerald-400/90 mt-1 font-mono flex items-center gap-1">
+                  <span>⚡ Requires Java {(() => {
+                    const clean = version.replace(/[^0-9.]/g, '')
+                    const parts = clean.split('.').map((n) => parseInt(n, 10))
+                    const minor = parts[1] || 20
+                    const patch = parts[2] || 0
+                    if (minor >= 21 || (minor === 20 && patch >= 5)) return 21
+                    if (minor >= 17) return 17
+                    return 8
+                  })()} (Auto-managed Eclipse Temurin)</span>
+                </div>
               </div>
 
               <div>

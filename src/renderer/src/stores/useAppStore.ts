@@ -168,7 +168,7 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
         updater: data.updater
       })
     } catch (err) {
-      console.error('Failed to bootstrap BlockHost store:', err)
+      console.error('Failed to bootstrap VoxelPulse store:', err)
       set({ initialized: true })
     }
   },
