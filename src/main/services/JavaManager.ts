@@ -20,10 +20,16 @@ export class JavaManager {
    * Determine the recommended Java major version for a given Minecraft version.
    */
   public static getRequiredJavaVersion(mcVersion: string): number {
-    const clean = mcVersion.replace(/[^0-9.]/g, '')
-    const parts = clean.split('.').map((n) => parseInt(n, 10))
-    const minor = parts[1] || 20
-    const patch = parts[2] || 0
+    const parts = mcVersion.match(/\d+/g)?.map(Number) ?? []
+    if (parts.length === 0) return 21
+
+    // Minecraft switched from 1.x numbering to year-based versions (26.1+).
+    // Those releases require Java 25; don't treat the second component as the
+    // old Minecraft minor version (which incorrectly made 26.3 require Java 8).
+    if (parts[0] >= 26) return 25
+
+    const minor = parts[0] === 1 ? (parts[1] ?? 20) : parts[0]
+    const patch = parts[0] === 1 ? (parts[2] ?? 0) : (parts[1] ?? 0)
 
     if (minor >= 21 || (minor === 20 && patch >= 5)) {
       return 21
@@ -38,7 +44,7 @@ export class JavaManager {
   }
 
   /**
-   * Detect system and BlockHost-managed Java installations.
+   * Detect system and ChunkHarbor-managed Java installations.
    */
   public async detectInstallations(): Promise<JavaInstallation[]> {
     const candidates = new Set<string>()
@@ -144,7 +150,7 @@ export class JavaManager {
     logger.info(`Fetching Adoptium metadata for Temurin ${majorVersion}: ${apiUrl}`)
 
     const res = await fetch(apiUrl, {
-      headers: { 'User-Agent': 'VoxelPulse/1.0.0' }
+      headers: { 'User-Agent': 'ChunkHarbor/1.0.0' }
     })
     if (!res.ok) {
       throw new Error(`Adoptium API returned HTTP ${res.status} for Java ${majorVersion}`)

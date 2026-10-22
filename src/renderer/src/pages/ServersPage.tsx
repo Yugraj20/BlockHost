@@ -1135,7 +1135,7 @@ export const ServersPage: React.FC = () => {
                     onChange={(e) => setAutoStart(e.target.checked)}
                     className="accent-bh-accent"
                   />
-                  Automatically start this server when VoxelPulse launches
+                  Automatically start this server when ChunkHarbor launches
                 </label>
               </div>
 

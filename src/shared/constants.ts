@@ -1,6 +1,6 @@
 export const DEFAULT_SERVER_PROPERTIES: Record<string, { value: string; description: string; category: 'general' | 'world' | 'gameplay' | 'network' | 'security' }> = {
   'server-port': { value: '25565', description: 'TCP port the Minecraft server listens on', category: 'network' },
-  'motd': { value: 'A VoxelPulse Minecraft Server', description: 'Message displayed in the server list', category: 'general' },
+  'motd': { value: 'A ChunkHarbor Minecraft Server', description: 'Message displayed in the server list', category: 'general' },
   'max-players': { value: '20', description: 'Maximum number of players allowed online simultaneously', category: 'general' },
   'gamemode': { value: 'survival', description: 'Default game mode for players (survival, creative, adventure, spectator)', category: 'gameplay' },
   'difficulty': { value: 'normal', description: 'World difficulty (peaceful, easy, normal, hard)', category: 'gameplay' },

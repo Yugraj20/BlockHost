@@ -1,5 +1,6 @@
+# Keep the original application ID so the new branded installer upgrades existing installs.
 appId: com.voxelpulse.app
-productName: VoxelPulse
+productName: ChunkHarbor
 directories:
   buildResources: build
   output: dist
@@ -16,7 +17,7 @@ extraResources:
     filter:
       - '**/*'
 win:
-  executableName: VoxelPulse
+  executableName: ChunkHarbor
   icon: build/icon.ico
   target:
     - target: nsis
@@ -27,11 +28,11 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: always
   createStartMenuShortcut: true
-  shortcutName: VoxelPulse
-  uninstallDisplayName: VoxelPulse Minecraft Server Manager
+  shortcutName: ChunkHarbor
+  uninstallDisplayName: ChunkHarbor Minecraft Server Manager
   include: build/installer.nsh
   deleteAppDataOnUninstall: false
 publish:
   provider: github
-  owner: blockhost
-  repo: blockhost-releases
+  owner: Yugraj20
+  repo: BlockHost

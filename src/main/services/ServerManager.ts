@@ -45,7 +45,7 @@ export class ServerManager extends EventEmitter {
     for (const server of this.config.getServers()) {
       this.states.set(server.id, this.createInitialRuntimeState(server))
       this.consoleLogs.set(server.id, [
-        `[VoxelPulse] Server "${server.name}" (${server.software} ${server.version}) ready.`
+        `[ChunkHarbor] Server "${server.name}" (${server.software} ${server.version}) ready.`
       ])
       this.setupAutoRestartCron(server)
     }
@@ -180,7 +180,7 @@ export class ServerManager extends EventEmitter {
       directory,
       thumbnail: input.thumbnail || `bg-${(this.config.getServers().length % 16) + 1}`,
       maxPlayers: input.maxPlayers,
-      motd: input.motd || `${input.name} - Powered by VoxelPulse`,
+      motd: input.motd || `${input.name} - Powered by ChunkHarbor`,
       gamemode: input.gamemode,
       difficulty: input.difficulty,
       onlineMode: true,
@@ -216,14 +216,14 @@ export class ServerManager extends EventEmitter {
     state.status = 'installing'
     this.states.set(id, state)
     this.consoleLogs.set(id, [
-      `[VoxelPulse] Creating server "${server.name}" (${server.software} ${server.version})...`
+      `[ChunkHarbor] Creating server "${server.name}" (${server.software} ${server.version})...`
     ])
     this.config.upsertServer(server)
     this.emitStateUpdate()
 
     try {
       const javaBin = await this.javaManager.resolveJavaForServer(server.version, server.javaPath)
-      this.appendConsole(id, `[VoxelPulse] Downloading ${server.software} ${server.version}...`)
+      this.appendConsole(id, `[ChunkHarbor] Downloading ${server.software} ${server.version}...`)
       const installed = await this.providerService.installServerJar({
         software: server.software,
         version: server.version,
@@ -235,7 +235,7 @@ export class ServerManager extends EventEmitter {
       this.config.upsertServer(server)
 
       state.status = 'offline'
-      this.appendConsole(id, `[VoxelPulse] Installation complete (${server.jarFile}). Ready to start!`)
+      this.appendConsole(id, `[ChunkHarbor] Installation complete (${server.jarFile}). Ready to start!`)
       this.config.addActivity({
         serverId: server.id,
         serverName: server.name,
@@ -249,7 +249,7 @@ export class ServerManager extends EventEmitter {
       state.status = 'offline'
       this.appendConsole(
         id,
-        `[VoxelPulse/WARN] Could not download jar right now (${(err as Error).message}). You can retry or place server.jar manually.`
+        `[ChunkHarbor/WARN] Could not download jar right now (${(err as Error).message}). You can retry or place server.jar manually.`
       )
       this.emitStateUpdate()
       return server
@@ -359,7 +359,7 @@ export class ServerManager extends EventEmitter {
     }
 
     this.states.set(id, this.createInitialRuntimeState(server))
-    this.consoleLogs.set(id, [`[VoxelPulse] Imported server "${server.name}" from ${sourcePath}`])
+    this.consoleLogs.set(id, [`[ChunkHarbor] Imported server "${server.name}" from ${sourcePath}`])
     this.config.upsertServer(server)
     this.config.addActivity({
       serverId: server.id,
@@ -395,7 +395,7 @@ export class ServerManager extends EventEmitter {
     if (!server.jarFile.startsWith('@') && !fs.existsSync(jarFullPath)) {
       // Attempt on-demand download if jar is missing
       const javaForInstall = await this.javaManager.resolveJavaForServer(server.version, server.javaPath)
-      this.appendConsole(serverId, `[VoxelPulse] Server JAR missing, downloading ${server.software} ${server.version}...`)
+      this.appendConsole(serverId, `[ChunkHarbor] Server JAR missing, downloading ${server.software} ${server.version}...`)
       const installed = await this.providerService.installServerJar({
         software: server.software,
         version: server.version,
@@ -439,7 +439,7 @@ export class ServerManager extends EventEmitter {
 
     this.appendConsole(
       serverId,
-      `[VoxelPulse] Starting ${server.name} with Java: "${javaBin}" (-Xmx${server.ramMb}M) on port ${server.port}`
+      `[ChunkHarbor] Starting ${server.name} with Java: "${javaBin}" (-Xmx${server.ramMb}M) on port ${server.port}`
     )
 
     const child = spawn(javaBin, args, {
@@ -467,7 +467,7 @@ export class ServerManager extends EventEmitter {
     child.stderr.on('data', handleChunk)
 
     child.on('error', (err) => {
-      this.appendConsole(serverId, `[VoxelPulse/ERROR] Process error: ${err.message}`)
+      this.appendConsole(serverId, `[ChunkHarbor/ERROR] Process error: ${err.message}`)
     })
 
     child.on('close', (code) => {
@@ -486,7 +486,7 @@ export class ServerManager extends EventEmitter {
         state.status = 'crashed'
         state.crashLoopCount += 1
         state.lastCrashReport = this.readLatestCrashReport(server.directory)
-        this.appendConsole(serverId, `[VoxelPulse/CRASH] Server exited abnormally with code ${code}.`)
+        this.appendConsole(serverId, `[ChunkHarbor/CRASH] Server exited abnormally with code ${code}.`)
 
         this.config.addActivity({
           serverId: server.id,
@@ -507,7 +507,7 @@ export class ServerManager extends EventEmitter {
           const delaySec = Math.min(30, state.crashLoopCount * 5)
           this.appendConsole(
             serverId,
-            `[VoxelPulse/Recovery] Auto-restarting in ${delaySec}s (Attempt ${state.crashLoopCount}/${server.autoRestartMaxRetries})...`
+            `[ChunkHarbor/Recovery] Auto-restarting in ${delaySec}s (Attempt ${state.crashLoopCount}/${server.autoRestartMaxRetries})...`
           )
           setTimeout(() => {
             if (!this.processes.has(serverId)) {
@@ -520,7 +520,7 @@ export class ServerManager extends EventEmitter {
       } else {
         state.status = 'offline'
         state.crashLoopCount = 0
-        this.appendConsole(serverId, `[VoxelPulse] Server stopped (code ${code ?? 0}).`)
+        this.appendConsole(serverId, `[ChunkHarbor] Server stopped (code ${code ?? 0}).`)
         this.config.addActivity({
           serverId: server.id,
           serverName: server.name,
@@ -644,7 +644,7 @@ export class ServerManager extends EventEmitter {
   public sendCommand(serverId: string, command: string): void {
     const proc = this.processes.get(serverId)
     if (!proc || !proc.stdin.writable) {
-      this.appendConsole(serverId, `[VoxelPulse/WARN] Cannot send command: server is not running.`)
+      this.appendConsole(serverId, `[ChunkHarbor/WARN] Cannot send command: server is not running.`)
       return
     }
     const clean = command.replace(/^\//, '').trim()
@@ -670,7 +670,7 @@ export class ServerManager extends EventEmitter {
     await new Promise<void>((resolve) => {
       const timeout = setTimeout(() => {
         if (this.processes.has(serverId)) {
-          this.appendConsole(serverId, `[VoxelPulse] Force-terminating unresponsive server process...`)
+          this.appendConsole(serverId, `[ChunkHarbor] Force-terminating unresponsive server process...`)
           if (process.platform === 'win32' && proc.pid) {
             try {
               execFileSync('taskkill', ['/pid', String(proc.pid), '/t', '/f'], {
@@ -757,7 +757,7 @@ export class ServerManager extends EventEmitter {
       'level-name': server.levelName
     }
 
-    const lines = ['#Minecraft server properties', `#Managed by VoxelPulse - ${new Date().toISOString()}`]
+    const lines = ['#Minecraft server properties', `#Managed by ChunkHarbor - ${new Date().toISOString()}`]
     for (const [k, v] of Object.entries(merged)) {
       lines.push(`${k}=${v}`)
     }
@@ -883,7 +883,7 @@ export class ServerManager extends EventEmitter {
     const current = this.getBans(serverId)
     const entry: BanEntry = {
       created: new Date().toISOString(),
-      source: 'VoxelPulse Console',
+      source: 'ChunkHarbor Console',
       expires: 'forever',
       reason
     }
@@ -934,8 +934,8 @@ export class ServerManager extends EventEmitter {
     if (server.autoRestartScheduleCron && cron.validate(server.autoRestartScheduleCron)) {
       const job = cron.schedule(server.autoRestartScheduleCron, () => {
         if (this.processes.has(server.id)) {
-          this.appendConsole(server.id, `[VoxelPulse] Scheduled auto-restart triggered.`)
-          this.sendCommand(server.id, 'say [VoxelPulse] Scheduled server restart in 10 seconds!')
+          this.appendConsole(server.id, `[ChunkHarbor] Scheduled auto-restart triggered.`)
+          this.sendCommand(server.id, 'say [ChunkHarbor] Scheduled server restart in 10 seconds!')
           setTimeout(() => this.restartServer(server.id), 10000)
         }
       })
@@ -977,7 +977,7 @@ export class ServerManager extends EventEmitter {
           ) {
             this.appendConsole(
               serverId,
-              `[VoxelPulse/Guard] RAM usage (${state.ramUsedMb} MB) exceeded ${srv.autoRestartRamLimitPercent}% threshold. Restarting...`
+              `[ChunkHarbor/Guard] RAM usage (${state.ramUsedMb} MB) exceeded ${srv.autoRestartRamLimitPercent}% threshold. Restarting...`
             )
             this.restartServer(serverId).catch(() => {})
           }

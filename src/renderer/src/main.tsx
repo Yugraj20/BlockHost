@@ -23,7 +23,7 @@ class RootErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
   }
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
-    console.error('Unhandled React Render Error in VoxelPulse:', error, info)
+    console.error('Unhandled React Render Error in ChunkHarbor:', error, info)
   }
 
   render(): ReactNode {
@@ -35,7 +35,7 @@ class RootErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
               !
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white">VoxelPulse Interface Exception</h1>
+              <h1 className="text-lg font-bold text-white">ChunkHarbor Interface Exception</h1>
               <p className="text-xs text-slate-400 mt-1">
                 An unexpected error occurred during rendering. You can reload the UI safely.
               </p>

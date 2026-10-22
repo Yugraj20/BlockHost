@@ -34,7 +34,7 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     if (!window.api || typeof window.api.onEvent !== 'function') {
-      console.warn('BlockHost window.api is not yet available.')
+      console.warn('ChunkHarbor window.api is not yet available.')
       return
     }
 
@@ -107,8 +107,8 @@ export const App: React.FC = () => {
           className="absolute inset-0 w-full h-full object-cover opacity-25 filter blur-sm scale-105 pointer-events-none"
         />
         <div className="relative z-10 flex flex-col items-center justify-center gap-3">
-          <img src="./logo.png" alt="BlockHost" className="w-16 h-16 rounded-2xl animate-pulse shadow-2xl" />
-          <p className="text-sm font-bold tracking-wide">Loading BlockHost Engine...</p>
+          <img src="./logo.png" alt="ChunkHarbor" className="w-16 h-16 rounded-2xl animate-pulse shadow-2xl" />
+          <p className="text-sm font-bold tracking-wide">Loading ChunkHarbor...</p>
         </div>
       </div>
     )
@@ -140,7 +140,7 @@ export const App: React.FC = () => {
               <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
                 <Lock className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-extrabold text-bh-text">BlockHost PIN Lock</h3>
+              <h3 className="text-base font-extrabold text-bh-text">ChunkHarbor PIN Lock</h3>
               <p className="text-xs text-bh-muted">Enter your security PIN to unlock controls.</p>
               <input
                 type="password"

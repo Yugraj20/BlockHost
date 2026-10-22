@@ -64,7 +64,7 @@ export class UpdaterService extends EventEmitter {
     if (owner === 'blockhost') owner = 'Yugraj20'
     if (repo === 'blockhost-releases') repo = 'BlockHost'
 
-    const currentVersion = app?.getVersion?.() || '0.2.1-beta'
+    const currentVersion = app?.getVersion?.() || '0.2.2-beta'
 
     if (!silent) {
       this.setState({ status: 'checking', message: `Checking ${owner}/${repo} for updates...` })
@@ -72,11 +72,11 @@ export class UpdaterService extends EventEmitter {
 
     try {
       logger.info(
-        `[Updater] Querying GitHub releases: https://api.github.com/repos/${owner}/${repo}/releases/latest`
+        `[Updater] Querying GitHub releases: https://api.github.com/repos/${owner}/${repo}/releases`
       )
-      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, {
+      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases?per_page=20`, {
         headers: {
-          'User-Agent': 'BlockHost-Desktop-App',
+          'User-Agent': 'ChunkHarbor-Desktop-App',
           Accept: 'application/vnd.github+json'
         }
       })
@@ -86,18 +86,27 @@ export class UpdaterService extends EventEmitter {
         if (!silent) {
           this.setState({
             status: 'not-available',
-            message: `BlockHost v${currentVersion} is up to date.`
+            message: `ChunkHarbor v${currentVersion} is up to date.`
           })
         }
         return this.state
       }
 
-      const release = (await res.json()) as {
+      const releases = (await res.json()) as Array<{
         tag_name?: string
         name?: string
         body?: string
         html_url?: string
+        draft?: boolean
         assets?: Array<{ name: string; browser_download_url: string }>
+      }>
+      // /releases/latest excludes prereleases; select the first published release for beta users.
+      const release = releases.find((candidate) => !candidate.draft)
+      if (!release) {
+        if (!silent) {
+          this.setState({ status: 'not-available', message: 'No published releases are available for ChunkHarbor.' })
+        }
+        return this.state
       }
 
       const remoteTag = release.tag_name || ''
@@ -126,7 +135,7 @@ export class UpdaterService extends EventEmitter {
         if (!silent) {
           this.setState({
             status: 'not-available',
-            message: `BlockHost v${currentVersion} is the latest version.`
+            message: `ChunkHarbor v${currentVersion} is the latest version.`
           })
         }
       }

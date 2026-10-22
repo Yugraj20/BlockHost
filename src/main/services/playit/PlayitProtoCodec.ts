@@ -4,7 +4,7 @@ import net from 'net'
  * Authentic TypeScript port of playit-cloud/playit-agent:
  * - crates.io `message-encoding = "0.2.2"` binary serializer/deserializer
  * - `playit-agent-proto` (`control_messages.rs`, `control_feed.rs`, `rpc.rs`, `udp_proto.rs`)
- * Runs 100% in-process inside BlockHost's Electron main process without any external binary.
+ * Runs 100% in-process inside ChunkHarbor's Electron main process without any external binary.
  */
 export const PLAYIT_AGENT_VERSION = {
   variant_id: '308943e8-faef-4835-a2ba-270351f72aa3',

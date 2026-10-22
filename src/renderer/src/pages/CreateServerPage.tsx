@@ -40,7 +40,7 @@ export const SERVER_PRESETS: ServerPreset[] = [
     gamemode: 'survival',
     difficulty: 'normal',
     maxPlayers: 20,
-    motd: 'Cozy Survival Realm — Powered by VoxelPulse',
+    motd: 'Cozy Survival Realm — Powered by ChunkHarbor',
     aikarFlags: true,
     thumbnail: 'bg-3',
     badge: 'Popular'
@@ -54,7 +54,7 @@ export const SERVER_PRESETS: ServerPreset[] = [
     gamemode: 'survival',
     difficulty: 'normal',
     maxPlayers: 12,
-    motd: 'Modern Fabric Modded World — Powered by VoxelPulse',
+    motd: 'Modern Fabric Modded World — Powered by ChunkHarbor',
     aikarFlags: true,
     thumbnail: 'bg-7',
     badge: 'Modded'
@@ -68,7 +68,7 @@ export const SERVER_PRESETS: ServerPreset[] = [
     gamemode: 'creative',
     difficulty: 'peaceful',
     maxPlayers: 15,
-    motd: 'Creative Builders & Redstone Lab — Powered by VoxelPulse',
+    motd: 'Creative Builders & Redstone Lab — Powered by ChunkHarbor',
     aikarFlags: true,
     thumbnail: 'bg-10',
     badge: 'Creative'
@@ -96,7 +96,7 @@ export const SERVER_PRESETS: ServerPreset[] = [
     gamemode: 'survival',
     difficulty: 'normal',
     maxPlayers: 10,
-    motd: 'Pure Vanilla Minecraft — Powered by VoxelPulse',
+    motd: 'Pure Vanilla Minecraft — Powered by ChunkHarbor',
     aikarFlags: false,
     thumbnail: 'bg-1',
     badge: 'Vanilla'
@@ -173,7 +173,7 @@ export const CreateServerPage: React.FC = () => {
   const [portFree, setPortFree] = useState(true)
   const [ramMb, setRamMb] = useState(4096)
   const [maxPlayers, setMaxPlayers] = useState(20)
-  const [motd, setMotd] = useState('A VoxelPulse Minecraft Server')
+  const [motd, setMotd] = useState('A ChunkHarbor Minecraft Server')
   const [gamemode, setGamemode] = useState<'survival' | 'creative' | 'adventure' | 'spectator'>('survival')
   const [difficulty, setDifficulty] = useState<'peaceful' | 'easy' | 'normal' | 'hard'>('normal')
   const [aikarFlags, setAikarFlags] = useState(true)

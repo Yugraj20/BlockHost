@@ -23,7 +23,7 @@ export class ModrinthService {
   private async fetchApi<T>(endpoint: string): Promise<T> {
     const res = await fetch(`${this.apiBase}${endpoint}`, {
       headers: {
-        'User-Agent': 'BlockHost/1.0.0 (MinecraftServerManager; contact@blockhost.local)'
+        'User-Agent': 'ChunkHarbor/0.2.2 (MinecraftServerManager)'
       }
     })
     if (!res.ok) {

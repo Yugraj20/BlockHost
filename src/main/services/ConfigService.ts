@@ -31,15 +31,17 @@ export class ConfigService {
     const rootAppData = app?.isReady?.()
       ? app.getPath('appData')
       : (process.env.APPDATA || path.resolve('.'))
-    const legacyDir = path.join(rootAppData, 'BlockHost')
-    const primaryDir = path.join(rootAppData, 'VoxelPulse')
+    const primaryDir = path.join(rootAppData, 'ChunkHarbor')
+    const legacyDirs = ['VoxelPulse', 'BlockHost'].map((name) => path.join(rootAppData, name))
 
-    // If legacy BlockHost directory exists and new VoxelPulse dir does not, keep existing user data seamlessly
-    if (fs.existsSync(legacyDir) && !fs.existsSync(primaryDir)) {
-      this.baseDir = legacyDir
-    } else {
-      this.baseDir = primaryDir
-    }
+    // The logger may have created the new folder before config loads, so prefer actual
+    // saved data over folder existence when selecting the existing user's data location.
+    const dataDirs = [primaryDir, ...legacyDirs]
+    const dirWithConfig = dataDirs.find((dir) => fs.existsSync(path.join(dir, 'config.json')))
+    const existingLegacyDataDir = legacyDirs.find(
+      (dir) => fs.existsSync(dir) && fs.readdirSync(dir).length > 0
+    )
+    this.baseDir = dirWithConfig || existingLegacyDataDir || primaryDir
 
     fs.mkdirSync(this.baseDir, { recursive: true })
     this.configFile = path.join(this.baseDir, 'config.json')
@@ -91,7 +93,7 @@ export class ConfigService {
           id: 'act-init',
           timestamp: Date.now(),
           type: 'system',
-          title: 'BlockHost initialized',
+      title: 'ChunkHarbor initialized',
           subtitle: 'Ready to create or import Minecraft servers'
         }
       ],

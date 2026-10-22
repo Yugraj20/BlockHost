@@ -24,7 +24,7 @@ export class TrayService {
     const image = iconPath ? nativeImage.createFromPath(iconPath) : nativeImage.createEmpty()
 
     this.tray = new Tray(image)
-    this.tray.setToolTip('BlockHost - Minecraft Server Hosting')
+    this.tray.setToolTip('ChunkHarbor - Minecraft Server Manager')
     this.tray.on('double-click', () => {
       const win = this.getMainWindow()
       if (win) {
@@ -75,7 +75,7 @@ export class TrayService {
 
     const menu = Menu.buildFromTemplate([
       {
-        label: 'Open BlockHost Dashboard',
+        label: 'Open ChunkHarbor Dashboard',
         click: () => {
           const win = this.getMainWindow()
           if (win) {
@@ -94,7 +94,7 @@ export class TrayService {
         }
       },
       {
-        label: 'Quit BlockHost',
+        label: 'Quit ChunkHarbor',
         click: () => {
           this.onQuitRequested()
           app.quit()

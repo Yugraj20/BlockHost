@@ -160,4 +160,4 @@ const api = {
 }
 
 contextBridge.exposeInMainWorld('api', api)
-export type BlockHostApi = typeof api
+export type ChunkHarborApi = typeof api

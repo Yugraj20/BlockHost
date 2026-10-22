@@ -42,7 +42,7 @@ export class ServerProviderService {
 
   private async fetchJson<T>(url: string): Promise<T> {
     const res = await fetch(url, {
-      headers: { 'User-Agent': 'BlockHost/1.0.0 (MinecraftServerManager)' }
+      headers: { 'User-Agent': 'ChunkHarbor/0.2.2 (MinecraftServerManager)' }
     })
     if (!res.ok) {
       throw new Error(`HTTP ${res.status} fetching ${url}`)

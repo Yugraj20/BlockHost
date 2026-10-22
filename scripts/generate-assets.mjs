@@ -39,7 +39,7 @@ async function main() {
   }
   console.log(`Sliced 16 backgrounds (${cellW}x${cellH}) into resources/backgrounds and src/renderer/public/backgrounds`)
 
-  // Create Isometric Emerald Cube SVG for BlockHost logo
+  // Create Isometric Emerald Cube SVG for ChunkHarbor logo
   const svgLogo = `
   <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
     <defs>
@@ -100,7 +100,7 @@ async function main() {
   const icoBuf = Buffer.concat([icoHeader, icoEntry, png256])
   fs.writeFileSync(path.resolve('build/icon.ico'), icoBuf)
   fs.writeFileSync(path.resolve('resources/icon.ico'), icoBuf)
-  console.log('Generated BlockHost icons (build/icon.ico, resources/icon.png, resources/tray.png)')
+  console.log('Generated ChunkHarbor icons (build/icon.ico, resources/icon.png, resources/tray.png)')
 }
 
 main().catch((err) => {

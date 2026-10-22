@@ -97,7 +97,7 @@ export class MonitorService {
   /**
    * Add a Windows Firewall inbound allow rule for the given server port (triggers UAC elevation via PowerShell Start-Process -Verb RunAs).
    */
-  public async addWindowsFirewallRule(port: number, ruleName = `BlockHost Minecraft ${port}`): Promise<{ success: boolean; message: string }> {
+  public async addWindowsFirewallRule(port: number, ruleName = `ChunkHarbor Minecraft ${port}`): Promise<{ success: boolean; message: string }> {
     try {
       const safeName = ruleName.replace(/'/g, '')
       const cmd = `New-NetFirewallRule -DisplayName '${safeName} (TCP)' -Direction Inbound -LocalPort ${port} -Protocol TCP -Action Allow; New-NetFirewallRule -DisplayName '${safeName} (UDP)' -Direction Inbound -LocalPort ${port} -Protocol UDP -Action Allow`

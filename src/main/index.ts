@@ -467,7 +467,7 @@ function createWindow(): void {
 }
 
 app.whenReady().then(async () => {
-  logger.info('BlockHost starting up...')
+  logger.info('ChunkHarbor starting up...')
   wireServiceEvents()
   registerIpcHandlers()
   playitService.restoreSession()

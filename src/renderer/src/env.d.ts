@@ -1,8 +1,8 @@
-import type { BlockHostApi } from '../../preload/index'
+import type { ChunkHarborApi } from '../../preload/index'
 
 declare global {
   interface Window {
-    api: BlockHostApi
+    api: ChunkHarborApi
   }
 }
 

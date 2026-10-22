@@ -1,9 +1,9 @@
 {
-  "name": "voxelpulse",
-  "version": "0.2.1-beta",
-  "description": "VoxelPulse - High-Performance Minecraft Server Engine & Control Station",
+  "name": "chunkharbor",
+  "version": "0.2.2-beta",
+  "description": "ChunkHarbor - Minecraft Server Manager for Windows",
   "main": "./out/main/index.js",
-  "author": "VoxelPulse Team",
+  "author": "ChunkHarbor",
   "license": "MIT",
   "scripts": {
     "dev": "electron-vite dev",

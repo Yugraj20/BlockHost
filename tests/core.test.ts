@@ -18,9 +18,9 @@ import {
   UDP_CHANNEL_ESTABLISH_ID
 } from '../src/main/services/playit/PlayitProtoCodec'
 
-describe('VoxelPulse Core & Live Integration Suite', () => {
+describe('ChunkHarbor Core & Live Integration Suite', () => {
   it('blocks path traversal outside server root directory', () => {
-    const root = path.resolve('C:/BlockHost/servers/test')
+    const root = path.join(os.tmpdir(), 'ChunkHarbor', 'servers', 'test')
     const valid = resolveSafePath(root, 'logs/latest.log')
     expect(valid).toContain('latest.log')
 
@@ -45,6 +45,8 @@ describe('VoxelPulse Core & Live Integration Suite', () => {
     expect(JavaManager.getRequiredJavaVersion('1.20.4')).toBe(17)
     expect(JavaManager.getRequiredJavaVersion('1.20.5')).toBe(21)
     expect(JavaManager.getRequiredJavaVersion('1.21.4')).toBe(21)
+    expect(JavaManager.getRequiredJavaVersion('26.1')).toBe(25)
+    expect(JavaManager.getRequiredJavaVersion('26.3')).toBe(25)
   })
 
   it('matches official upstream playit-agent binary encoding test vectors', () => {
@@ -122,7 +124,7 @@ describe('VoxelPulse Core & Live Integration Suite', () => {
   })
 
   it('compresses and extracts ZIP archives with ZipSlip protection', async () => {
-    const tmpBase = fs.mkdtempSync(path.join(os.tmpdir(), 'blockhost-zip-'))
+    const tmpBase = fs.mkdtempSync(path.join(os.tmpdir(), 'chunkharbor-zip-'))
     const srcDir = path.join(tmpBase, 'src')
     const outDir = path.join(tmpBase, 'out')
     const zipFile = path.join(tmpBase, 'backup.zip')
@@ -151,7 +153,7 @@ describe('VoxelPulse Core & Live Integration Suite', () => {
       body: JSON.stringify({
         code: claimCode,
         agent_type: 'self-managed',
-        version: `blockhost ${PLAYIT_AGENT_VERSION.version_major}.${PLAYIT_AGENT_VERSION.version_minor}.${PLAYIT_AGENT_VERSION.version_patch}`
+        version: `chunkharbor ${PLAYIT_AGENT_VERSION.version_major}.${PLAYIT_AGENT_VERSION.version_minor}.${PLAYIT_AGENT_VERSION.version_patch}`
       })
     })
     expect(res.ok).toBe(true)
@@ -162,7 +164,7 @@ describe('VoxelPulse Core & Live Integration Suite', () => {
 
   it('fetches live PaperMC versions and build download URLs from Fill v3 API', async () => {
     const res = await fetch('https://fill.papermc.io/v3/projects/paper', {
-      headers: { 'User-Agent': 'BlockHost/1.0.0' }
+      headers: { 'User-Agent': 'ChunkHarbor/0.2.2' }
     })
     expect(res.ok).toBe(true)
     const data = (await res.json()) as { versions: Record<string, string[]> }
@@ -171,7 +173,7 @@ describe('VoxelPulse Core & Live Integration Suite', () => {
     expect(versions).toContain('1.21.4')
 
     const buildsRes = await fetch('https://fill.papermc.io/v3/projects/paper/versions/1.21.4/builds', {
-      headers: { 'User-Agent': 'BlockHost/1.0.0' }
+      headers: { 'User-Agent': 'ChunkHarbor/0.2.2' }
     })
     expect(buildsRes.ok).toBe(true)
     const builds = (await buildsRes.json()) as Array<{

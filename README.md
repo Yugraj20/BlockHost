@@ -1,8 +1,8 @@
 <div align="center">
 
-  <img src="resources/logo.png" alt="VoxelPulse Logo" width="120" height="120" />
+  <img src="resources/logo.png" alt="ChunkHarbor Logo" width="120" height="120" />
 
-  # VoxelPulse
+  # ChunkHarbor
   **The Next-Generation Minecraft Server Engine & Management Platform for Windows**
 
   [![Release](https://img.shields.io/github/v/release/Yugraj20/BlockHost?color=10b981&label=Release&style=for-the-badge)](https://github.com/Yugraj20/BlockHost/releases)
@@ -35,9 +35,9 @@
 
 ---
 
-## ⚡ What is VoxelPulse?
+## ⚡ What is ChunkHarbor?
 
-**VoxelPulse** is an all-in-one desktop application that transforms your Windows PC into a high-performance, self-hosted Minecraft server station. Whether you're setting up a vanilla survival server for friends, a Paper network with custom plugins, or a massive Fabric/Forge modpack, VoxelPulse takes care of Java runtimes, engine binaries, firewall tunneling, mod management, and automated backups right out of the box.
+**ChunkHarbor** is an all-in-one desktop application that transforms your Windows PC into a high-performance, self-hosted Minecraft server station. Whether you're setting up a vanilla survival server for friends, a Paper network with custom plugins, or a massive Fabric/Forge modpack, ChunkHarbor takes care of Java runtimes, engine binaries, firewall tunneling, mod management, and automated backups right out of the box.
 
 ---
 
@@ -94,15 +94,15 @@
 
 ### 1. Download & Install
 Download the latest Windows installer:
-👉 **[Download VoxelPulse Setup 0.2.1-beta.exe](https://github.com/Yugraj20/BlockHost/releases/latest)**
+👉 **[Download ChunkHarbor 0.2.2-beta](https://github.com/Yugraj20/BlockHost/releases/latest)**
 
-Run the installer, pick your preferred installation directory, and launch **VoxelPulse**.
+Run the installer, pick your preferred installation directory, and launch **ChunkHarbor**.
 
 ### 2. Create Your First Server
 1. Click **Create Server** in the navigation bar.
 2. Choose your preferred engine (**Paper**, **Vanilla**, **Fabric**, etc.) and Minecraft version.
 3. Select your RAM allocation using the 5-part slider.
-4. Click **Create & Launch** — VoxelPulse automatically provisions the server files, installs the matching Java runtime, and accepts the EULA.
+4. Click **Create & Launch** — ChunkHarbor automatically provisions the server files, installs the matching Java runtime, and accepts the EULA.
 
 ### 3. Invite Friends Instantly
 1. Navigate to the **Network & Tunneling** tab.
@@ -162,11 +162,11 @@ Compile and package the standalone NSIS installer executable:
 npm run build:win
 ```
 The output executable will be generated inside the `dist/` directory:
-`dist/VoxelPulse Setup 0.2.1-beta.exe`
+`dist/ChunkHarbor Setup 0.2.2-beta.exe`
 
 ## ☕ Support the Project
 
-If you love using VoxelPulse and want to support ongoing maintenance and new features, consider buying a coffee:
+If you love using ChunkHarbor and want to support ongoing maintenance and new features, consider buying a coffee:
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/yugraj20)
 
@@ -179,5 +179,5 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ---
 
 <div align="center">
-  <sub>Developed by <a href="https://github.com/Yugraj20">Yugraj Singh Sekhon</a>. VoxelPulse is not affiliated with Mojang Studios, Microsoft, or playit.gg.</sub>
+  <sub>Developed by <a href="https://github.com/Yugraj20">Yugraj Singh Sekhon</a>. ChunkHarbor is not affiliated with Mojang Studios, Microsoft, or playit.gg.</sub>
 </div>

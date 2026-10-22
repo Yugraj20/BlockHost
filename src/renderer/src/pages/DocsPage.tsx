@@ -6,27 +6,27 @@ export const DocsPage: React.FC = () => {
     {
       icon: Server,
       title: '1. Creating & Importing Servers',
-      body: 'Use "Create Server" to deploy Vanilla, Paper, Purpur, Fabric, Quilt, Forge, or NeoForge servers. VoxelPulse automatically downloads the official server JAR, writes eula.txt, configures server.properties, and picks the optimal Java version. You can also import existing server folders or .zip archives with automatic loader and port detection.'
+      body: 'Use "Create Server" to deploy Vanilla, Paper, Purpur, Fabric, Quilt, Forge, or NeoForge servers. ChunkHarbor automatically downloads the official server JAR, writes eula.txt, configures server.properties, and picks the optimal Java version. You can also import existing server folders or .zip archives with automatic loader and port detection.'
     },
     {
       icon: Cpu,
       title: '2. Automatic Java Management & Aikar Flags',
-      body: 'Minecraft 1.16.5 and older require Java 8, 1.17–1.20.4 use Java 17, and 1.20.5+ / 1.21+ require Java 21+. Visit Settings → Java Runtimes to install Eclipse Temurin JRE 8, 17, 21, or 25 directly into VoxelPulse with one click.'
+      body: 'Minecraft 1.16.5 and older use Java 8, 1.17–1.20.4 use Java 17, 1.20.5–1.21 use Java 21, and year-based 26.x releases use Java 25. Visit Settings → Java Runtimes to install Eclipse Temurin JRE 8, 17, 21, or 25 directly into ChunkHarbor with one click.'
     },
     {
       icon: Globe,
       title: '3. Built-in playit.gg Tunneling (Zero Separate Processes)',
-      body: 'VoxelPulse includes a native TypeScript implementation of the playit.gg control & proxy protocol inside the application. Link your account or activate the built-in agent on the Network tab, then enable a tunnel for any server to share a public join address without router port forwarding.'
+      body: 'ChunkHarbor includes a native TypeScript implementation of the playit.gg control & proxy protocol inside the application. Link your account or activate the built-in agent on the Network tab, then enable a tunnel for any server to share a public join address without router port forwarding.'
     },
     {
       icon: Puzzle,
       title: '4. Modrinth Mods, Plugins & Modpacks (.mrpack)',
-      body: 'Browse Modrinth directly inside VoxelPulse. Installing a mod or plugin automatically resolves and downloads required dependencies into mods/ or plugins/. Installing a Modpack extracts server overrides and downloads all server-compatible files.'
+      body: 'Browse Modrinth directly inside ChunkHarbor. Installing a mod or plugin automatically resolves and downloads required dependencies into mods/ or plugins/. Installing a Modpack extracts server overrides and downloads all server-compatible files.'
     },
     {
       icon: History,
       title: '5. Live Backups, Safe Restore & Cron Scheduling',
-      body: 'When creating a backup on a running server, VoxelPulse automatically sends save-off and save-all flush before zipping and re-enables saving afterward. Restoring any backup automatically creates a Pre-Restore Safety Snapshot first.'
+      body: 'When creating a backup on a running server, ChunkHarbor automatically sends save-off and save-all flush before zipping and re-enables saving afterward. Restoring any backup automatically creates a Pre-Restore Safety Snapshot first.'
     },
     {
       icon: Shield,
@@ -43,10 +43,10 @@ export const DocsPage: React.FC = () => {
         </div>
         <div>
           <h2 className="text-lg font-extrabold text-bh-text">
-            VoxelPulse User Guide & Documentation
+            ChunkHarbor User Guide & Documentation
           </h2>
           <p className="text-xs text-bh-muted">
-            Complete reference for all 65 features included in VoxelPulse Desktop
+            Complete reference for all 65 features included in ChunkHarbor Desktop
           </p>
         </div>
       </div>

@@ -98,7 +98,7 @@ export class DownloadService extends EventEmitter {
         url,
         {
           headers: {
-            'User-Agent': 'BlockHost/1.0.0 (Windows; MinecraftServerManager)'
+            'User-Agent': 'ChunkHarbor/0.2.2 (Windows; MinecraftServerManager)'
           }
         },
         (res) => {

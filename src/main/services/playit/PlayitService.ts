@@ -262,7 +262,7 @@ export class PlayitService extends EventEmitter {
             {
               code: claimCode,
               agent_type: 'self-managed',
-              version: `blockhost ${PLAYIT_AGENT_VERSION.version_major}.${PLAYIT_AGENT_VERSION.version_minor}.${PLAYIT_AGENT_VERSION.version_patch}`
+              version: `chunkharbor ${PLAYIT_AGENT_VERSION.version_major}.${PLAYIT_AGENT_VERSION.version_minor}.${PLAYIT_AGENT_VERSION.version_patch}`
             },
             ''
           )

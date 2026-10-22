@@ -15,30 +15,26 @@ if (-not $token) {
 }
 
 $repo = "Yugraj20/BlockHost"
-$tagName = "v0.2.0-beta"
-$releaseName = "BlockHost v0.2.0-beta"
+$tagName = "v0.2.2-beta"
+$releaseName = "ChunkHarbor v0.2.2-beta"
 $releaseBody = @"
-## BlockHost v0.2.0-beta
+## ChunkHarbor v0.2.2-beta
 
-Welcome to **BlockHost v0.2.0-beta**! This release brings major enhancements, including a silent background update checker, responsive 3D web experience, and direct developer support.
+This beta introduces the ChunkHarbor name, fixes Java selection for year-based Minecraft releases, and improves beta update discovery.
 
-### 🌟 Key Highlights in v0.2.0-beta
-- **Mandatory Update System**: Silent background update checks on launch with forced update modal and direct installer downloads.
-- **Buy Me a Coffee Integration**: Direct support button integrated into desktop app sidebar and official website.
-- **Responsive 3D Experience**: Dynamic isometric camera scaling, touch-scrolling separation, and mobile navigation drawer.
-- **7 Server Engines Supported**: Vanilla, Paper, Purpur, Fabric, Quilt, Forge, and NeoForge with automatic version & build discovery.
-- **Adoptium JDK Manager**: Automatic detection and 1-click downloads for Java 8, 17, 21, and 25.
-- **Integrated playit.gg Networking**: Zero port-forwarding required with in-process tunneling.
-- **Accurate 5-Part RAM Allocation**: Proportional memory milestones with 1-click snap alignment.
+### Highlights
+- Minecraft 26.x selects Java 25 instead of Java 8.
+- Existing BlockHost and VoxelPulse user data remains available after upgrading.
+- The update checker now detects published prereleases.
 
-### 📦 Assets Included
-- ``BlockHost.Setup.0.2.0-beta.exe``: Windows x64 NSIS Installer.
+### Asset
+- ChunkHarbor Setup 0.2.2-beta.exe: Windows x64 installer.
 "@
 
 $headers = @{
     "Authorization" = "Bearer $token"
     "Accept"        = "application/vnd.github+json"
-    "User-Agent"    = "BlockHost-Release"
+    "User-Agent"    = "ChunkHarbor-Release"
 }
 
 # Check if release already exists
@@ -64,8 +60,8 @@ if (-not $release) {
     Write-Host "Created release with ID $($release.id) at $($release.html_url)"
 }
 
-# Upload asset BlockHost Setup 0.2.0-beta.exe
-$exeFile = Get-ChildItem (Join-Path $PSScriptRoot "..\dist") -Filter "*.exe" | Where-Object { $_.Name -like "*0.2.0-beta*" } | Select-Object -First 1
+# Upload the ChunkHarbor 0.2.2-beta installer
+$exeFile = Get-ChildItem (Join-Path $PSScriptRoot "..\dist") -Filter "*.exe" | Where-Object { $_.Name -like "*0.2.2-beta*" } | Select-Object -First 1
 $exePath = $exeFile.FullName
 if (Test-Path $exePath) {
     $exeName = [System.IO.Path]::GetFileName($exePath)
