@@ -1,6 +1,6 @@
 {
   "name": "voxelpulse",
-  "version": "0.2.0-beta",
+  "version": "0.2.1-beta",
   "description": "VoxelPulse - High-Performance Minecraft Server Engine & Control Station",
   "main": "./out/main/index.js",
   "author": "VoxelPulse Team",

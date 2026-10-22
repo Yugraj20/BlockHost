@@ -94,7 +94,7 @@
 
 ### 1. Download & Install
 Download the latest Windows installer:
-👉 **[Download VoxelPulse Setup 0.2.0-beta.exe](https://github.com/Yugraj20/BlockHost/releases/latest)**
+👉 **[Download VoxelPulse Setup 0.2.1-beta.exe](https://github.com/Yugraj20/BlockHost/releases/latest)**
 
 Run the installer, pick your preferred installation directory, and launch **VoxelPulse**.
 
@@ -162,7 +162,7 @@ Compile and package the standalone NSIS installer executable:
 npm run build:win
 ```
 The output executable will be generated inside the `dist/` directory:
-`dist/VoxelPulse Setup 0.2.0-beta.exe`
+`dist/VoxelPulse Setup 0.2.1-beta.exe`
 
 ## ☕ Support the Project
 
